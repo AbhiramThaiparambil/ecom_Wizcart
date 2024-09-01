@@ -1,0 +1,240 @@
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="css/mystyle.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    .is-valid {
+        border-color: green;
+    }
+
+    .is-valid::after {
+        content: '✔';
+        color: green;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .is-invalid {
+        border-color: red;
+    }
+
+    .is-invalid::after {
+        content: '✖';
+        color: red;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 10px;
+        top: calc(50% - 10px);
+        cursor: pointer;
+    }
+</style>
+
+<div id="page">
+    <section class="_form_05">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="_form-05-box ">
+                        <div class="row">
+                            <div class="col-sm-5 _lk_nb">
+                                <div class="form-05-box-a text-center">
+                                    <div class="_form_05_logo mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa-brands fa-wizards-of-the-coast" style="color: #ffffff; font-size: rem;"></i>
+                                            <h2 class="mb-0 ms-2">Wizcart</h2>
+                                        </div>
+                                        <p>Login using social media to get quick access</p>
+                                    </div>
+                                    <div class="_form_05_socialmedia">
+                                        <ol class="list-unstyled">
+                                            <li><a href="/signup/google"><i class="fa fa-google-plus"></i></a> Sign With Google</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-7 _nb-pl">
+                                <div class="_mn_df">
+                                    <div class="main-head">
+                                        <h2>Login to your account</h2>
+                                    </div>
+                                    <form id="loginForm">
+                                        <div class="form-group position-relative">
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required onkeyup="vemail()">
+                                            <div id="errmesg-email" class="error-message">&nbsp;</div>
+                                        </div>
+                                        <div class="form-group position-relative">
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required onkeyup="vpassword()">
+                                            <i class="fa fa-eye password-toggle" id="togglePassword"></i>
+                                            <div id="errmesg-password" class="error-message">&nbsp;</div>
+                                        </div>
+                                        <div class=" mb-5 d-flex justify-content-end ">
+                                            <a href="/forgetpassword">forgot password?</a>
+                                         </div>
+                                        <div class="">
+                                            <p>Don't have an account? <a href="/signup" class="text-danger">Sign Up</a></p>
+                                        </div>
+                                        <input class="_btn_04" type="submit" value="Login">
+
+                                        <% if (typeof(message) !== 'undefined') { %>
+                                            <h4 class="text-center text-danger"><%= message %></h4>
+                                        <% } %>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="errorMessageDiv"></div>
+    <footer id="colorlib-footer" role="contentinfo">
+        <!-- footer content -->
+    </footer>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+<% if (toast.length > 0) { %>
+    <div id="toast" class="toast-black toast show"><%= toast[0] %></div>
+<% } %>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    if(validateForm()) {
+        event.preventDefault(); 
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        fetch("/loginData", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.redirectUrl) {
+                    window.location.href = data.redirectUrl;
+                } else if (data.message) {
+                    Swal.fire({
+                        title: data.message,
+                        text: data.message,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            title: 'swal-custom-title',
+                            content: 'swal-custom-content',
+                            confirmButton: 'swal-custom-confirm-button'
+                        }
+                    }).then(() => {
+                        if (data.redirectUrl) {
+                            window.location.href = data.redirectUrl;
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'Try Again',
+                    customClass: {
+                        popup: 'swal-custom-popup',
+                        title: 'swal-custom-title',
+                        content: 'swal-custom-content',
+                        confirmButton: 'swal-custom-confirm-button'
+                    }
+                });
+            });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toast = document.getElementById('toast');
+    if (toast) {
+        toast.classList.add('show');
+        setTimeout(function() {
+            toast.classList.remove('show');
+        }, 7000);
+    }
+});
+
+function vemail() {
+    const emailog = document.getElementById("email");
+    const email = emailog.value;
+    const EMAIL_REGEX = /^[^\s@]+@gmail\.com$/i;
+    const err = document.getElementById("errmesg-email");
+
+    if (!EMAIL_REGEX.test(email)) {
+        err.innerHTML = 'Invalid email address';
+        emailog.classList.add('is-invalid');
+        emailog.classList.remove('is-valid');
+    } else {
+        err.innerHTML = '';
+        emailog.classList.remove('is-invalid');
+        emailog.classList.add('is-valid');
+    }
+}
+
+function vpassword() {
+    const password = document.getElementById("password");
+    const PASSWORD_REGEX = /^[\w\d]{6,}$/;
+    const err = document.getElementById("errmesg-password");
+
+    if (!PASSWORD_REGEX.test(password.value)) {
+        err.innerHTML = 'Password must be at least 6 characters';
+        password.classList.add('is-invalid');
+        password.classList.remove('is-valid');
+    } else {
+        err.innerHTML = '';
+        password.classList.remove('is-invalid');
+        password.classList.add('is-valid');
+    }
+}
+
+function validateForm() {
+    const emailog = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    vemail();
+    vpassword();
+
+    if (emailog.classList.contains('is-invalid') || password.classList.contains('is-invalid')) {
+        return false;
+    }
+    return true;
+}
+
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+    if (!validateForm()) {
+        alert('Details are incorrect');
+        e.preventDefault();
+    }
+});
+
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordField.setAttribute('type', type);
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+
+<%- include('../layout/footer') %>

@@ -1,0 +1,239 @@
+.profile{
+    position: absolute;
+    top: -80px;
+    left: 92%;
+    right: 0px;
+    
+}
+
+/*tost .css */
+
+
+
+
+.toast-black {
+  visibility: hidden; /* Hidden by default. Visible only when JavaScript adds a class */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Margin is -width/2 to center the toast */
+  background-color: #000000; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 5px; /* Rounded borders */
+  padding: 16px; /* Some padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 9999; /* Add a z-index if needed */
+  left: 50%; /* Center the toast horizontally */
+  bottom: 30px; /* 30px from the bottom */
+  font-size: 17px; /* Increase font size */
+}
+
+.toast-black.show {
+  visibility: visible; /* Show the toast */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 8s; /* Fade in and out */
+  animation: fadein 0.5s, fadeout 0.5s 8s; /* Fade in and out */
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+
+
+.toast {
+    background-color: #333;
+    color: white;
+  }
+  .toast-header {
+    background-color: #222;
+    color: white;
+    border-bottom: 1px solid #444;
+  }
+
+
+   
+  
+    /* Custom CSS for SweetAlert2 */
+.custom-swal-popup {
+  width: 500px !important; 
+  height: 80px !important; 
+  background-color: #000000; /* Custom background color */
+}
+
+.custom-swal-title {
+  color: #4caf50; /* Custom title color */
+}
+
+
+.custom-swal-title{
+    color: #dff2fe; 
+    font-size: 20px;
+
+    font-family:sans-serif;
+
+}
+  
+.custom-popup {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-title {
+    color: #dc3545;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .custom-content {
+    color: #6c757d;
+    font-size: 18px;
+  }
+  
+  .custom-confirm-button {
+    background-color: #007bff !important;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-confirm-button:hover {
+    background-color: #0056b3 !important;
+    transform: scale(1.05);
+  }
+
+
+  .swal-custom-popup {
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+}
+.swal-custom-title {
+    color: #721c24;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5rem;
+}
+.swal-custom-content {
+    color: #721c24;
+    font-family: 'Arial', sans-serif;
+}
+.swal-custom-confirm-button {
+    background-color: #d9534f;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+}
+.swal-custom-confirm-button:hover {
+    background-color: #c9302c;
+}
+
+.stock-alert {
+  display: flex;
+  align-items: center;
+  background-color: #f8d7da;
+  border: px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.stock-alert strong {
+  margin-right: 10px;
+}
+.stock-alert-icon {
+  color: #dc3545;
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+
+.stock-alert {
+  background-color: #fff;
+  border: 0.5px solid #dc3545;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  max-width: 300px;
+  overflow: hidden;
+}
+
+.stock-alert-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff0f0;
+}
+
+.stock-alert-icon {
+  font-size: 2.5rem;
+  color: #dc3545;
+  margin-right: 15px;
+}
+
+.stock-alert-text {
+  flex: 1;
+}
+
+
+
+.stock-alert-message {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.stock-alert-footer {
+  background-color: #f8f9fa;
+  padding: 15px;
+  text-align: center;
+}
+
+.product-image-container {
+  position: relative;
+}
+
+.zoom-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.zoom-image {
+  width: 100%;
+  height: auto;
+}
+
+.zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: none;
+  display: none;
+}
+
+.zoom-result {
+  position: absolute;
+  top: 0;
+  left: 110%; /* Adjust this value to position the zoom result */
+  border: 1px solid #d4d4d4;
+  width: 300px;
+  height: 300px;
+  background-repeat: no-repeat;
+  display: none;
+}

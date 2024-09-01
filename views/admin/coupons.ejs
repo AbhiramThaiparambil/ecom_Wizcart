@@ -1,0 +1,791 @@
+<%- include('./adminLayout/header') %>
+<body id="page-top">
+
+<link rel="stylesheet" href="css/mystyle.css">
+<style>
+  .error-message {
+    color: red;
+    font-size: 0.875em;
+  }
+</style>
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1b1a1a !important;"        >
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fab fa-wizards-of-the-coast" style="color: #ffffff;"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Wizcart<sup></sup></div>
+        </a>
+    
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+    
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="/dashboard">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/salesReport?filter=today">
+                <i class="fas fa-file" style="color: #ffffff;"></i>
+                                     <span>sales report</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/ledger">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>ledger book</span></a>
+      </li>
+
+    
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Interface
+        </div>
+    
+        <!-- Nav Item - Pages Collapse Menu -->
+    
+        <li class="nav-item">
+            <a class="nav-link" href="/userList">
+                <i class="fas fa-fw fa fa-user"></i>
+              
+                <span>USER MANAGEMENT</span></a>
+        </li>
+    
+       
+    
+    
+      
+    
+        <li class="nav-item">
+          <a class="nav-link" href="/orderMangement">
+            <i class="fa-solid fa-truck-fast" style="color: #ffffff;"></i>
+            
+              <span>ORDER MANAGEMENT</span> </a>
+      </li>
+    
+    
+    
+      <li class="nav-item">
+        <a class="nav-link" href="/returnOrders">
+            <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i>
+            <span>Return Orders</span>
+        </a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <li class="nav-item">
+            <a class="nav-link" href="/couponMangement">
+                <i class="fa-solid fa-gift" style="color: #ffffff;"></i>              
+                     <span>COUPON MANAGEMENT</span></a>
+        </li>
+    
+    
+        <li class="nav-item">
+            <a class="nav-link" href="/offerManagemanent">
+                <i class="fa-solid fa-chart-simple" style="color: #ffffff;"></i>             
+                     <span>Offer MANAGEMENT</span></a>
+        </li>
+    
+    
+    
+    
+    
+    
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-box" style="color: #ffffff;"></i>
+                <span>PRODUCTS</span>
+            </a>
+            <div id="collapseUtilities"  class="collapse" aria-labelledby="headingUtilities"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header" style="color: red;">  product management</h6>
+                    <a class="collapse-item" style="background-color: rgb(0, 0, 0); color: #f0f2f5;" href="/addProduct"> <i class="fa-solid fa-box" style="color: #ff0000;"></i> ADD NEW PRODUCT</a>
+                    <a class="collapse-item"  href="Products"> <i class="fa-solid fa-pen-to-square" style="color: #ff0400;"></i> EDIT PRODUCT</a>
+                    <a class="collapse-item"  style="background-color: rgb(0, 0, 0); color: #f0f2f5;"  href="Products"> <i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i> HIDE PRODUCT</a>
+                    <a class="collapse-item"   href="Products"><i class="fa-solid fa-trash" style="color: #ff0000;" ></i>DELETE PRODUCT</a>
+                </div>
+            </div>
+        </li>
+    
+    
+      
+    
+            <li class="nav-item">
+                <a class="nav-link" href="/category">
+                    <i class="fas fa-boxes" style="color: #ffffff;"></i>
+                    <span>CATEGORY MANAGEMENT</span> </a>
+            </li>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">CATEGORY</h6>
+                    
+                    
+                    <a class="collapse-item" href="category"> CATEGORY</a>
+    
+                </div>
+            </div>
+           
+        </li>
+    
+        <li>
+            
+        </li>
+    
+    
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+    
+        
+        <div class="sidebar-heading">
+            PORFILE
+        </div>
+    
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>PORFILE</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Login Screens:</h6>
+                    <a class="collapse-item" href="/logout"><i class="fas fa-sign-out-alt" style="color: #000000;"></i>Logout </a>
+                  
+                </div>
+            </div>
+        </li>
+    
+    
+    
+        
+       
+    
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+    
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+    
+    
+    
+    </ul>
+
+
+     
+        <div id="content-wrapper" class="d-flex flex-column">
+    
+          <!-- Main Content -->
+          <div id="content">
+    
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow d-flex justify-content-between align-items-center">
+              <h2 class="mb-3">Coupons List</h2>
+    
+              <button class="btn btn-success  mr-4" onclick="conformAddnewCoupon()">
+                New Coupon
+              </button>
+    
+              <button type="button" class="btn btn-primary ms-auto mr-5" id="addCouponModel" hidden data-toggle="modal" data-target="#myModal">
+                new coupon
+              </button>
+            </nav>
+    
+        <div class="container mt-5">
+
+
+          <table class="table table-striped">
+
+            <thead>
+              <tr>
+                <th scope="col">Coupon Code</th>
+                <th scope="col">discount_Price</th>
+                <th cope="col">minPurchaseAmount</th>
+                <th scope="col">Expiry Date</th>
+                <th scope="col">Description</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Hide/Unhide</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (coupons.length === 0) { %>
+              <tr>
+                <td colspan="4">No coupons available</td>
+              </tr>
+              <% } else { %>
+                <% coupons.forEach((coupon) => { %>
+                    <tr>
+                      <td><%= coupon.Coupon_Code %></td>
+                      <td>₹<%=coupon.discount_Price %></td>
+                      <td>₹<%= coupon.minPurchaseAmount %></td>
+                      <td><%= coupon.expiry_Date %></td>
+                      <td><%= coupon.Description %></td>
+                      
+                      <td>
+                        <button onclick='deleteCoupon("<%= coupon._id %>")' class="btn btn-danger btn-sm" title="Delete Coupon">
+                          <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                      </td>
+                      <td>
+                        <button 
+                          onclick='editCoupon(
+                            "<%= coupon._id %>",
+                            "<%= coupon.Coupon_Code %>",
+                            "<%= coupon.discount_Price%>",
+                            "<%= coupon.expiry_Date %>",
+                            "<%= coupon.Description %>",
+                            "<%= coupon.minPurchaseAmount %>"
+                            
+                            )' 
+                          class="btn btn-warning btn-sm" title="Edit Coupon">
+                          <i class="fas fa-edit"></i> Edit
+                        </button>
+                      </td>
+                      <% if (coupon.is_active === true) { %>
+                        <td>
+                          <button onclick='hideCoupon("<%= coupon._id %>")' class="btn btn-danger btn-sm me-2" title="Hide Coupon">
+                            <i class="fas fa-eye-slash"></i> Hide
+                          </button>
+                        </td>
+                      <% } else { %>
+                        <td>
+                          <button onclick='unhideCoupon("<%= coupon._id %>")' class="btn btn-success btn-sm" title="Unhide Coupon">
+                            <i class="fas fa-eye"></i> Unhide
+                          </button>
+                        </td>
+                      <% } %>
+                    </tr>
+                  <% }) %>
+                  
+              <% } %>
+
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+        
+          <div class="modal" id="editCouponModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+        
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Coupon</h4>
+                        <!-- <button type="button" class="close" data-bs-dismiss="#editCouponModal">&times;</button> -->
+                    </div>
+        
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form  action="/updateCoupon" method="post">
+                            <input type="text" name="edit_id" id="edit_id"hidden>
+                            <div class="mb-3">
+                                <label for="edit_couponCode" class="form-label">Coupon Code</label>
+                                <input type="text" class="form-control" id="edit_couponCode" name="Edit_couponCode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_discount" class="form-label">Discount AMOUNT</label>
+                                <input type="number" class="form-control" id="edit_discount" name="Edit_discount" min="0"  >
+                            </div>
+                           
+
+                            <div class="mb-3">
+                              <label for="edit_discount" class="form-label">minPurchaseAmount</label>
+                              <input type="number" class="form-control" id="Edit_minPurchaseAmount" name="Edit_minPurchaseAmount" min="0"   >
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="edit_expiryDate" class="form-label">Expiry Date</label>
+                                <input type="date" class="form-control" id="edit_expiryDate" name="Edit_expiryDate" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="edit_description" name="Edit_description" rows="3" ></textarea>
+                            </div>
+                             <button type="submit" id="editSubmitButton" hidden ></button>
+                        </form>
+                        <button onclick="updateCoupon()" class="btn btn-primary">Update Coupon</button>
+
+                    </div>
+        
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> -->
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        
+          
+  
+
+
+
+
+       <!-- add new coupon -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+  
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">add new coupon</h4>
+                  <button type="button" class="close" id="closeBtn" data-dismiss="modal">&times;</button>
+                </div>
+  
+                <!-- Modal body -->
+                <div class="modal-body">
+  
+  
+                  <form id="couponForm">
+                    <div class="mb-3">
+                      <label for="couponCode" class="form-label">Coupon Code</label>
+                      <input type="text" class="form-control" id="couponCode" name="couponCode" required onkeyup="validateCouponCode()">
+                      <div id="couponCodeError" class="error-message"></div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="discount" class="form-label">Discount (%)</label>
+                      <input type="number" class="form-control" id="discount" name="discount" min="0" required onkeyup="validateDiscount()">
+                      <div id="discountError" class="error-message"></div>
+                    </div>
+                   
+
+                    <div class="mb-3">
+                      <label for="discount" class="form-label">MIN PURCHASE AMOUNT</label>
+                      <input type="number" class="form-control" id="minPurchase" name="minPurchase" min="0" required onkeyup="validateDiscount()">
+                      <div id="discountError" class="error-message"></div>
+                    </div>
+
+
+
+
+                    <div class="mb-3">
+                      <label for="expiryDate" class="form-label">Expiry Date</label>
+                      <input type="date" class="form-control" id="expiryDate" name="expiryDate" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description</label>
+                      <textarea class="form-control" id="description" name="description" rows="3" required onkeyup="validateDescription()"></textarea>
+                      <div id="descriptionError" class="error-message"></div>
+                    </div>
+                    <button type="button" onclick="createCoupon()" class="btn btn-primary">Create Coupon</button>
+                  </form>
+  
+                </div>
+  
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        
+          <% if (toast.length > 0) { %>
+            <div id="toast-container">
+              <% toast.forEach(function(message) { %>
+                <div class="toast toast-black show"><%= message %></div>
+              <% }) %>
+            </div>
+          <% } %>
+          
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const toasts = document.querySelectorAll('.toast');
+  
+  toasts.forEach(function(toast) {
+    toast.classList.add('show');
+    
+    // Hide the toast message after 7 seconds (7000 milliseconds)
+    setTimeout(function() {
+      toast.classList.remove('show');
+    }, 7000);
+  });
+});
+
+
+          async function deleteCoupon(id) {
+            Swal.fire({
+              title: "Are you sure you want to delete this coupon?",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Delete",
+              imageUrl: "https://t4.ftcdn.net/jpg/03/46/38/39/360_F_346383913_JQecl2DhpHy2YakDz1t3h0Tk3Ov8hikq.jpg",
+              imageWidth: 100,
+              imageHeight: 100,
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                try {
+
+                  const response = await fetch("/delete-coupon", {
+                    method: 'DELETE',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      id
+                    }),
+                  });
+
+                  if (response.ok) {
+                    Swal.fire({
+                      title: 'Deleted!',
+                      text: 'Coupon deleted successfully.',
+                      icon: 'success',
+                      confirmButtonColor: '#3085d6',
+                    }).then(() => {
+                      location.reload(); // Reload the page to reflect the changes
+                    });
+                  } else {
+                    Swal.fire({
+                      title: 'Failed!',
+                      text: 'Failed to delete coupon.',
+                      icon: 'error',
+                      confirmButtonColor: '#3085d6',
+                    });
+                  }
+                } catch (error) {
+                  console.error('Error:', error);
+                  Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while deleting the coupon.',
+                    icon: 'error',
+                    confirmButtonColor: '#3085d6',
+                  });
+                }
+              }
+            });
+          }
+
+
+
+
+          function conformAddnewCoupon() {
+
+
+            Swal.fire({
+              title: "add new coupon ?",
+
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "add new coupon ",
+              imageUrl: "https://media.tenor.com/uYAFdAfKa7sAAAAi/shopbackshopfest-shopback.gif",
+              imageWidth: 100,
+              imageHeight: 100,
+
+
+            }).then((result) => {
+              if (result.isConfirmed) {
+                document.getElementById('addCouponModel').click()
+              }
+            });
+          }
+
+          const descriptionPattern = /[a-zA-Z]{3,}/;
+          const couponCodePattern = /[a-zA-Z]{3,}/;
+          const discountPattern = /\d+/;
+
+          function validateCouponCode() {
+            const couponCode = document.getElementById('couponCode').value;
+            const errorDiv = document.getElementById('couponCodeError');
+            if (!couponCodePattern.test(couponCode)) {
+              errorDiv.textContent = "Coupon Code must have at least 3 letters.";
+            } else {
+              errorDiv.textContent = "";
+            }
+          }
+
+          function validateDiscount() {
+            const discount = document.getElementById('discount').value;
+            const errorDiv = document.getElementById('discountError');
+            if (!discountPattern.test(discount)) {
+              errorDiv.textContent = "Discount must contain a number.";
+            } else {
+              errorDiv.textContent = "";
+            }
+          }
+
+          function validateDescription() {
+            const description = document.getElementById('description').value;
+            const errorDiv = document.getElementById('descriptionError');
+            if (!descriptionPattern.test(description)) {
+              errorDiv.textContent = "Description must have at least 3 letters.";
+            } else {
+              errorDiv.textContent = "";
+            }
+          }
+
+          async function createCoupon() {
+            const couponCode = document.getElementById('couponCode').value;
+            const discount = document.getElementById('discount').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const description = document.getElementById('description').value;
+            const  minPurchaseAmount=document.getElementById('minPurchase').value
+            if (!descriptionPattern.test(description)) {
+              alert("Description must have at least 3 letters.");
+              return false;
+            }
+
+            if (!couponCodePattern.test(couponCode)) {
+              alert("Coupon Code must have at least 3 letters.");
+              return false;
+            }
+
+            if (!discountPattern.test(discount)) {
+              alert("Discount must contain a number.");
+              return false;
+            }
+
+            const response = await fetch('/createCoupon', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                couponCode,
+                discount,
+                expiryDate,
+                description,
+           minPurchaseAmount
+              })
+            });
+
+            if (response.ok) {
+              Swal.fire({
+                title: "Coupon created successfully!",
+                imageUrl: "https://cdn-icons-gif.flaticon.com/12707/12707676.gif",
+                imageWidth: 100,
+                imageHeight: 100,
+              }).then(()=>{
+                document.getElementById('closeBtn').click()
+              location.reload()
+              })
+             
+            } else {
+              alert('Failed to create coupon');
+            }
+          }
+
+  
+         
+ async function unhideCoupon(Unhide_id) {
+
+  Swal.fire({
+    title: "Are you sure you want to show this coupon?",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Show",
+    imageUrl: "https://cdn-icons-gif.flaticon.com/12707/12707676.gif",
+    imageWidth: 100,
+    imageHeight: 100,
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch("/show-coupon", {  
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ Unhide_id }),
+        });
+
+        if (response.ok) {
+          Swal.fire({
+            title: 'Shown!',
+            text: 'Coupon shown successfully.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+          }).then(() => {
+            location.reload(); 
+          });
+        } else {
+          const error = await response.json();
+          Swal.fire({
+            title: 'Failed!',
+            text: `Failed to show coupon: ${error.message}`,
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+          });
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while showing the coupon.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+        });
+      }
+    }
+  });
+}
+
+          
+
+async function hideCoupon(hide_id) {
+    Swal.fire({
+    title: "Are you sure you want to hide this coupon?",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Show",
+    imageUrl: "https://cdn-icons-gif.flaticon.com/12707/12707676.gif",
+    imageWidth: 100,
+    imageHeight: 100,
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch("/hide-coupon", {  
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ hide_id }),
+        });
+
+        if (response.ok) {
+          Swal.fire({
+            title: 'hidden!',
+            text: 'Coupon hidden successfully.',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+          }).then(() => {
+            location.reload(); 
+          });
+        } else {
+          const error = await response.json();
+          Swal.fire({
+            title: 'Failed!',
+            text: `Failed to show coupon: ${error.message}`,
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+          });
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while showing the coupon.',
+          icon: 'error',
+          confirmButtonColor: '#3085d6',
+        });
+      }
+    }
+  });
+}
+
+
+function editCoupon(id, code, discount, expiryDate, description,minPurchaseAmount) {
+    document.getElementById('edit_couponCode').value = code;
+    document.getElementById('edit_discount').value = discount;
+    document.getElementById('edit_expiryDate').value = expiryDate;
+    document.getElementById('edit_description').value = description;
+    document.getElementById('edit_id').value=id
+    
+    document.getElementById('Edit_minPurchaseAmount').value=minPurchaseAmount
+    // Trigger the modal
+    var editModal = new bootstrap.Modal(document.getElementById('editCouponModal'));
+    editModal.show();
+}
+async function updateCoupon() {
+  try {
+    const result = await Swal.fire({
+      title: 'Do you want to save the changes?',
+      text: "You won't be able to revert this!",
+      icon: 'question',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: "Don't save",
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#3085d6',
+      denyButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      background: '#f8f9fa',
+      backdrop: `rgba(0,0,0,0.4)`,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    });
+
+    if (result.isConfirmed) {
+      await Swal.fire({
+        title: 'Saved!',
+        icon: 'success',
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+
+      document.getElementById('editSubmitButton').click();
+
+    } else if (result.isDenied) {
+      await Swal.fire({
+        title: 'Changes are not saved',
+        icon: 'info',
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+    }
+    // If cancelled, do nothing
+  } catch (error) {
+    console.error('An error occurred:', error);
+    await Swal.fire({
+      title: 'Error',
+      text: 'An error occurred while processing your request.',
+      icon: 'error'
+    });
+  }
+}
+
+
+
+
+
+
+
+        </script>
+
+
+        <%- include('./adminLayout/footer') %>

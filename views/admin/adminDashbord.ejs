@@ -1,0 +1,722 @@
+<%- include('./adminLayout/header') %>
+<link rel="stylesheet" href="css/mystyle.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+      <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1b1a1a !important;"        >
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fab fa-wizards-of-the-coast" style="color: #ffffff;"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Wizcart<sup></sup></div>
+            </a>
+        
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+        
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/salesReport?filter=today">
+                    <i class="fas fa-file" style="color: #ffffff;"></i>
+                                         <span>sales report</span></a>
+            </li>
+
+
+           
+
+            <li class="nav-item active">
+              <a class="nav-link" href="/ledger">
+                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <span>ledger book</span></a>
+          </li>
+
+        
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+        
+            <!-- Nav Item - Pages Collapse Menu -->
+        
+            <li class="nav-item">
+                <a class="nav-link" href="/userList">
+                    <i class="fas fa-fw fa fa-user"></i>
+                  
+                    <span>USER MANAGEMENT</span></a>
+            </li>
+        
+           
+        
+        
+          
+        
+            <li class="nav-item">
+              <a class="nav-link" href="/orderMangement">
+                <i class="fa-solid fa-truck-fast" style="color: #ffffff;"></i>
+                
+                  <span>ORDER MANAGEMENT</span> </a>
+          </li>
+        
+        
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/returnOrders">
+                <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i>
+                <span>Return Orders</span>
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li class="nav-item">
+                <a class="nav-link" href="/couponMangement">
+                    <i class="fa-solid fa-gift" style="color: #ffffff;"></i>              
+                         <span>COUPON MANAGEMENT</span></a>
+            </li>
+        
+        
+            <li class="nav-item">
+                <a class="nav-link" href="/offerManagemanent">
+                    <i class="fa-solid fa-chart-simple" style="color: #ffffff;"></i>             
+                         <span>Offer MANAGEMENT</span></a>
+            </li>
+        
+        
+        
+        
+        
+        
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-box" style="color: #ffffff;"></i>
+                    <span>PRODUCTS</span>
+                </a>
+                <div id="collapseUtilities"  class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header" style="color: red;">  product management</h6>
+                        <a class="collapse-item" style="background-color: rgb(0, 0, 0); color: #f0f2f5;" href="/addProduct"> <i class="fa-solid fa-box" style="color: #ff0000;"></i> ADD NEW PRODUCT</a>
+                        <a class="collapse-item"  href="Products"> <i class="fa-solid fa-pen-to-square" style="color: #ff0400;"></i> EDIT PRODUCT</a>
+                        <a class="collapse-item"  style="background-color: rgb(0, 0, 0); color: #f0f2f5;"  href="Products"> <i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i> HIDE PRODUCT</a>
+                        <a class="collapse-item"   href="Products"><i class="fa-solid fa-trash" style="color: #ff0000;" ></i>DELETE PRODUCT</a>
+                    </div>
+                </div>
+            </li>
+        
+        
+          
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="/category">
+                        <i class="fas fa-boxes" style="color: #ffffff;"></i>
+                        <span>CATEGORY MANAGEMENT</span> </a>
+                </li>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">CATEGORY</h6>
+                        
+                        
+                        <a class="collapse-item" href="category"> CATEGORY</a>
+        
+                    </div>
+                </div>
+               
+            </li>
+        
+            <li>
+                
+            </li>
+        
+        
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        
+            
+            <div class="sidebar-heading">
+                PORFILE
+            </div>
+        
+            
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>PORFILE</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="/logout"><i class="fas fa-sign-out-alt" style="color: #000000;"></i>Logout </a>
+                      
+                    </div>
+                </div>
+            </li>
+        
+        
+        
+            
+           
+        
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+        
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        
+        
+        
+        </ul>
+
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+
+        
+                <style>
+                  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+              
+                  body {
+                    font-family: 'Poppins', sans-serif;
+                    background-color: #f0f2f5;
+                  }
+              
+                  .container {
+                    max-width: 1200px;
+                  }
+              
+                  h1, h5 {
+                    font-weight: 600;
+                  }
+              
+                  .chart-container {
+                    height: 300px;
+                  }
+              
+                  .card {
+                    border: none;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                  }
+              
+                  .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                  }
+              
+                  .metric-card {
+                    background: linear-gradient(135deg, #6e8efb, #a777e3);
+                    position: relative;
+                  }
+              
+                  .metric-card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.1);
+                    opacity: 0;
+                    transition: opacity 0.3s ease-in-out;
+                    border-radius: 15px;
+                  }
+              
+                  .metric-card:hover::before {
+                    opacity: 1;
+                  }
+              
+                  .btn-group .btn {
+                    border-radius: 30px;
+                    padding: 10px 20px;
+                    font-weight: 500;
+                    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+                  }
+              
+                  .btn-group .btn:hover, .btn-group .btn.active {
+                    background-color: #4e73df;
+                    border-color: #4e73df;
+                    color: #ffffff;
+                  }
+              
+                  .btn-group .btn i {
+                    margin-right: 8px;
+                  }
+              
+                  .display-4 {
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                  }
+              
+                  .card-subtitle {
+                    font-size: 0.875rem;
+                    opacity: 0.75;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="container py-5">
+                  <h1 class="text-center mb-5">Sales Dashboard</h1>
+                  <hr>
+                 <label for="" class="text-warning">custom date:</label>
+                  <div class="row mb-5">
+                    <div class="col-12">
+                        <form action="/dashboard" method="GET" class="input-group">
+                            <input type="date" name="startDate" class="form-control" placeholder="Start Date">
+                            <input type="date" name="endDate" class="form-control" placeholder="End Date">
+                            <button class="btn btn-primary" type="submit">Filter</button>
+                        </form>
+                  
+                  <hr>
+
+                      <div class="btn-group d-flex justify-content-center" role="group">
+                        <a href="/dashboard?filter=today" class="btn btn-outline-primary <%= filterOption === 'today' ? 'active' : '' %>">
+                          <i class="fas fa-calendar-day"></i> Today
+                        </a>
+                        <a href="/dashboard?filter=week" class="btn btn-outline-primary <%= filterOption === 'week' ? 'active' : '' %>">
+                          <i class="fas fa-calendar-week"></i> This Week
+                        </a>
+                        <a href="/dashboard?filter=month" class="btn btn-outline-primary <%= filterOption === 'month' ? 'active' : '' %>">
+                          <i class="fas fa-calendar-alt"></i> This Month
+                        </a>
+                        <a href="/dashboard?filter=year" class="btn btn-outline-primary <%= filterOption === 'year' ? 'active' : '' %>">
+                          <i class="fas fa-calendar"></i> This Year
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="row mb-5">
+                    <div class="col-md-3 mb-4">
+                      <div class="card metric-card text-white h-100">
+                        <div class="card-body">
+                          <h5 class="card-title"><i class="fas fa-box me-2"></i>Ordered Products</h5>
+                          <p class="card-text display-4"><%=totalOrderedProductCount %></p>
+                          <h6 class="card-subtitle">for week</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                      <div class="card metric-card text-white h-100">
+                        <div class="card-body">
+                          <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>Total Sales</h5>
+                          <p class="card-text display-4"><%=totalSales %></p>
+                          <h6 class="card-subtitle">for week</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                      <div class="card metric-card text-white h-100">
+                        <div class="card-body">
+                          <h5 class="card-title"><i class="fas fa-percent me-2"></i>Total Discounts</h5>
+                          <p class="card-text display-4"><%=totalDiscount %></p>
+                          <h6 class="card-subtitle">for week</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                      <div class="card metric-card text-white h-100">
+                        <div class="card-body">
+                          <h5 class="card-title"><i class="fas fa-coins me-2"></i>Final Revenue</h5>
+                          <p class="card-text display-4">₹<%=totalProfit %></p>
+                          <h6 class="card-subtitle">for week</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="row">
+                    <div class="col-md-8 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title mb-4">Sales Over Time</h5>
+                          <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title mb-4">Payment Methods</h5>
+                          <div class="chart-container">
+                            <canvas id="paymentMethodsChart"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <hr>
+                  <hr>
+                  <style>
+     
+                    .container {
+                        max-width: 1200px;
+                    }
+            
+                    h1 {
+                        color: #1a237e;
+                        font-weight: 700;
+                        margin-bottom: 2rem;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+                    }
+            
+                    .card {
+                        border: none;
+                        border-radius: 15px;
+                        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                        transition: all 0.3s ease;
+                    }
+            
+                    .card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+                    }
+            
+                    .card-title {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                        color: #333;
+                        margin-bottom: 1.5rem;
+                        border-bottom: 2px solid #007bff;
+                        padding-bottom: 0.5rem;
+                    }
+            
+                    .list-group-item {
+                        border: none;
+                        border-radius: 10px;
+                        margin-bottom: 10px;
+                        transition: all 0.2s ease;
+                    }
+            
+                    .list-group-item:hover {
+                        background-color: #e3f2fd;
+                        transform: scale(1.02);
+                    }
+            
+                    .list-group-numbered>li::before {
+                        color: #007bff;
+                        font-weight: bold;
+                        background-color: #e3f2fd;
+                        border-radius: 50%;
+                        width: 25px;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+            
+                    .badge {
+                        font-size: 0.9rem;
+                        background-color: #007bff;
+                        color: #fff;
+                        padding: 8px 12px;
+                        border-radius: 20px;
+                    }
+            
+                    .product-icon, .category-icon, .brand-icon {
+                        margin-right: 10px;
+                        font-size: 1.2rem;
+                    }
+            
+                    .product-icon { color: #4caf50; }
+                    .category-icon { color: #ff9800; }
+                    .brand-icon { color: #e91e63; }
+            
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translate3d(0, 40px, 0);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translate3d(0, 0, 0);
+                        }
+                    }
+            
+                    .animated {
+                        animation-duration: 1s;
+                        animation-fill-mode: both;
+                    }
+            
+                    .fadeInUp {
+                        animation-name: fadeInUp;
+                    }
+                </style>
+
+
+<div class="container mt-5">
+    <h1 class="text-center mb-5 animated fadeInUp">Top Sellers Dashboard</h1>
+
+    <div class="row">
+        <!-- Best Selling Products -->
+        <div class="col-md-4 mb-4 animated fadeInUp" style="animation-delay: 0.2s;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <i class="fas fa-box product-icon"></i>Top 10 Best Selling Products
+                    </h5>
+                    <ol class="list-group list-group-numbered">
+                        <% topProducts.forEach(product => { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><%= product.productDetails.product_name %></div>
+                                <small class="text-muted">
+                                    Category: <%= product.productDetails.category_name %>
+                                    <br>
+                                    Current Price:₹<%= product.productDetails.price %>
+                                </small>
+                            </div>
+                            <span class="badge"><%= product.count %> sold</span>
+                        </li>
+                        <% }) %>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Selling Categories -->
+        <div class="col-md-4 mb-4 animated fadeInUp" style="animation-delay: 0.4s;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <i class="fas fa-tags category-icon"></i>Top 10 Best Selling Categories
+                    </h5>
+                    <ol class="list-group list-group-numbered">
+                        <% topCategories.forEach(category => { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><%= category._id %></div>
+                            </div>
+                            <span class="badge"><%= category.count %> items sold</span>
+                        </li>
+                        <% }) %>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Best Selling Brands -->
+        <div class="col-md-4 mb-4 animated fadeInUp" style="animation-delay: 0.6s;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <i class="fas fa-trademark brand-icon"></i>Top 10 Best Selling Brands
+                    </h5>
+                    <ol class="list-group list-group-numbered">
+                        <% topBrands.forEach(brand => { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><%= brand._id %></div>
+                            </div>
+                            <span class="badge"><%= brand.count %> items sold</span>
+                        </li>
+                        <% }) %>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+                </div>
+              
+                <script>
+                  document.addEventListener("DOMContentLoaded", function() {
+                    // Sales Chart
+                    const salesCtx = document.getElementById('salesChart').getContext('2d');
+                    
+                    const salesData = {
+                      labels: <%- JSON.stringify(salesData.labels) %>,
+                      datasets: [{
+                        label: 'Total Sales',
+                        data: <%- JSON.stringify(salesData.sales) %>,
+                        backgroundColor: 'rgba(13, 110, 253, 0.7)',
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        hoverBackgroundColor: 'rgba(13, 110, 253, 0.9)',
+                        hoverBorderColor: 'rgba(13, 110, 253, 1)',
+                      }]
+                    };
+              
+                    new Chart(salesCtx, {
+                      type: 'bar',
+                      data: salesData,
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: { display: false },
+                          tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            borderColor: '#ffffff',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                            displayColors: false,
+                            callbacks: {
+                              label: function(context) {
+                                return `Sales: ₹${context.parsed.y.toLocaleString()}`;
+                              }
+                            }
+                          }
+                        },
+                        scales: {
+                          x: {
+                            type: 'category',
+                            title: {
+                              display: true,
+                              text: 'Date',
+                              color: '#0d6efd',
+                              font: { size: 14, weight: 'bold' }
+                            },
+                            grid: { display: false },
+                            ticks: { color: '#0d6efd' }
+                          },
+                          y: {
+                            title: {
+                              display: true,
+                              text: '(net revenue)',
+                              color: '#0d6efd',
+                              font: { size: 14, weight: 'bold' }
+                            },
+                            grid: { borderDash: [3, 3], color: '#d3d3d3' },
+                            ticks: { color: '#0d6efd' }
+                          }
+                        }
+                      }
+                    });
+              
+                    // Payment Methods Chart
+                    const paymentMethodsCtx = document.getElementById('paymentMethodsChart').getContext('2d');
+                    
+                    const paymentMethodsData = {
+                      labels: <%- JSON.stringify(paymentMethodsData.labels) %>,
+                      datasets: [{
+                        label: 'Payment Methods',
+                        data: <%- JSON.stringify(paymentMethodsData.values) %>,
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 0.7)',
+                          'rgba(54, 162, 235, 0.7)',
+                          'rgba(255, 206, 86, 0.7)',
+                          'rgba(75, 192, 192, 0.7)',
+                          'rgba(153, 102, 255, 0.7)'
+                        ],
+                        hoverBackgroundColor: [
+                          'rgba(255, 99, 132, 0.9)',
+                          'rgba(54, 162, 235, 0.9)',
+                          'rgba(255, 206, 86, 0.9)',
+                          'rgba(75, 192, 192, 0.9)',
+                          'rgba(153, 102, 255, 0.9)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 5,
+                        hoverOffset: 10
+                      }]
+                    };
+              
+                    new Chart(paymentMethodsCtx, {
+                      type: 'pie',
+                      data: paymentMethodsData,
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: {
+                            position: 'bottom',
+                            labels: {
+                              color: '#0d6efd',
+                              font: { size: 14, weight: '500' },
+                              padding: 20
+                            }
+                          },
+                          tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            borderColor: '#ffffff',
+                            borderWidth: 1,
+                            cornerRadius: 5,
+                            displayColors: false,
+                            callbacks: {
+                              label: function(context) {
+                                return `${context.label}: ₹${context.parsed.toLocaleString()}`;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    });
+                  });
+                </script>
+             
+
+                          
+
+        </div>
+        <!-- End of Content Wrapper -->
+        
+        <% if (toast.length > 0) { %>
+            <div id="toast" class="toast-black  toast show"><%= toast[0] %></div>
+        <% } %>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.classList.add('show');
+            // Hide the toast message after 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    });
+    </script>
+    
+    <%- include('./adminLayout/footer') %>

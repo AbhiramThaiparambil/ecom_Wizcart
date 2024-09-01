@@ -1,0 +1,188 @@
+
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="css/mystyle.css">
+<style>
+    .is-valid {
+        border-color: green;
+    }
+
+    .is-valid::after {
+        content: '✔';
+        color: green;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .is-invalid {
+        border-color: red;
+    }
+
+    .is-invalid::after {
+        content: '✖';
+        color: red;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    
+
+</style>
+
+
+
+<div id="page">
+    <nav class="colorlib-nav" role="navigation">
+        <!-- navigation content -->
+    </nav>
+
+    <div class="breadcrumbs">
+        <div class="container">
+        </div>
+    </div>
+
+    <section class="_form_06 " style="margin-top: 130px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="_form-05-box ">
+                        <div class="row">
+                            <div class="col-sm-5 _lk_nb">
+                                <div class="form-06-box-a text-center">
+                                    <div class="_form_05_logo mb-4">
+                                        <h2>Wizcart</h2>
+                                        <p>-------------------------------------</p>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="col-sm-7 _nb-pl">
+                                <div class="_mn_df">
+                                    <div class="main-head">
+                                        <h2>Admin login</h2>
+                                    </div>
+                                    <form id="SignUPForm" action="/adminLoginData" method="post" onsubmit="return validateForm()">
+                                        <div class="form-group position-relative">
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required onkeyup="vemail()">
+                                            <div id="errmesg-email" class="error-message">&nbsp</div>
+                                        </div>
+                                        <div class="form-group position-relative">
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required onkeyup="vpassword()">
+                                            <div id="errmesg-password" class="error-message">&nbsp</div>
+                                        </div>
+                                        <div class="">
+                                            
+                                                
+                                                
+                                            
+                
+                                            <div class=" mb-5  d-flex justify-content-end">
+                                                <!-- <a href="#">Forgot Password</a> -->
+                                             </div>
+                                        </div>                        
+                                                <input  class="_btn_05" type="submit" value="SignUP">
+                                                <% if (typeof(message) !== 'undefined') { %>
+                                                    <h4 class="text-center text-danger"><%= message %></h4>
+                                                <% } %>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <% if (toast.length > 0) { %>
+        <div id="toast" class="toast-black  toast show"><%= toast[0] %></div>
+    <% } %>
+    <footer id="colorlib-footer" role="contentinfo">
+        <!-- footer content -->
+    </footer>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.classList.add('show');
+            // Hide the toast message after 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    });
+
+
+
+
+function vemail() {
+    const emailog = document.getElementById("email");
+    const email = emailog.value;
+    const EMAIL_REGEX = /^[^\s@]+@gmail\.com$/i;
+    const err = document.getElementById("errmesg-email");
+
+    if (!EMAIL_REGEX.test(email)) {
+        err.innerHTML = 'Invalid email address';
+        emailog.classList.add('is-invalid');
+        emailog.classList.remove('is-valid');
+    } else {
+        err.innerHTML = '';
+        emailog.classList.remove('is-invalid');
+        emailog.classList.add('is-valid');
+    }
+}
+
+function vpassword() {
+    const password = document.getElementById("password");
+    const PASSWORD_REGEX = /^[\w\d]{6,}$/;
+    const err = document.getElementById("errmesg-password");
+
+    if (!PASSWORD_REGEX.test(password.value)) {
+        err.innerHTML = 'Password must be at least 6 characters';
+        password.classList.add('is-invalid');
+        password.classList.remove('is-valid');
+    } else {
+        err.innerHTML = '';
+        password.classList.remove('is-invalid');
+        password.classList.add('is-valid');
+    }
+}
+
+function validateForm() {
+    const emailog = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    vemail();
+    vpassword();
+
+    if (emailog.classList.contains('is-invalid') || password.classList.contains('is-invalid')) {
+        return false;
+    }
+    return true;
+}
+
+document.getElementById('SignUPForm').addEventListener('submit', function (e) {
+    if (!validateForm()) {
+        alert('Details are incorrect');
+        e.preventDefault();
+
+    }
+});
+</script>
+
+
+<%- include('../layout/footer') %>

@@ -1,0 +1,259 @@
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="css/mystyle.css">
+<style>
+    .is-valid {
+        border-color: green;
+    }
+
+    .is-valid::after {
+        content: '✔';
+        color: green;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .is-invalid {
+        border-color: red;
+    }
+
+    .is-invalid::after {
+        content: '✖';
+        color: red;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 10px);
+    }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+</style>
+
+<div id="page">
+    <nav class="colorlib-nav" role="navigation">
+        <!-- navigation content -->
+    </nav>
+ 
+
+    <div class="breadcrumbs">
+        <div class="container">
+        </div>
+    </div>
+    
+  
+
+    <section class="_form_05">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="_form-05-box">
+                        <div class="row">
+                            <div class="col-sm-5 _lk_nb">
+                                <div class="form-05-box-a text-center">
+                                    <div class="_form_05_logo mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa-brands fa-wizards-of-the-coast" style="color: #ffffff; font-size: 3rem;"></i>
+                                            <h2 class="mb-0 ms-2">Wizcart</h2>
+                                        </div>
+                                    </div>
+                                    <div class="_form_05_socialmedia">
+                                        <!-- Social media links can be added here -->
+                                    </div>
+                                </div>
+                            </div>
+                         
+                              
+                            <div class="col-sm-7 _nb-pl">
+                                <div class="_mn_df">
+                                    <div class="main-head">
+                                        <h2>Sign up to your account</h2>
+                                    </div>
+                                    <form id="SignUpForm" action="/otpData" method="post" onsubmit="return validateForm()">
+                                        <div class="form-group d-flex justify-content-center mb-3">
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp1" maxlength="1" onkeyup="moveToNext(this, 'otp2')" required>
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp2" maxlength="1" onkeyup="moveToNext(this, 'otp3')" required>
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp3" maxlength="1" onkeyup="moveToNext(this, 'otp4')" required>
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp4" maxlength="1" onkeyup="moveToNext(this, 'otp5')" required>
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp5" maxlength="1" onkeyup="moveToNext(this, 'otp6')" required>
+                                            <input type="text" class="form-control otp-input" name="otp" id="otp6" maxlength="1" onkeyup="moveToNext(this, null)" required>
+                                        </div>
+                                        <div id="errmesg-otp" class="error-message"></div>
+                                        <div>
+                                            <p>Already have an account? <a href="/login" class="text-danger fw-bold">Login</a></p>
+                                            <div class="mb-5 d-flex justify-content-end">
+                                                <a href="/signupOtp" class="btn btn-light" id="resendBtn" style="display: none;" onclick="resendOtp()">Resend OTP</a>
+                                                <p id="cooldownTimer" class="text-danger ms-3"></p>
+                                            </div>
+                                        </div>
+                                        <input class="btn btn-primary _btn_04" type="submit" value="Sign Up">
+                                    </form>
+                                    <p id="otpExpirationMessage" class="text-danger mt-2"></p>
+
+                                    <% if (typeof(message) !== 'undefined') { %>
+                                    <div class="alert alert-danger " role="alert">
+                                        
+                                        <P class="text-center"> <%= message %></P>
+                                         </div>
+                                         <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="otpSection" style="display: none;">
+                        <p id="otpExpirationMessage"></p>
+                        <button id="resendBtn" onclick="resendOtp()">Resend OTP</button>
+                        <p id="cooldownTimer"></p>
+                        
+
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+    
+ 
+ 
+
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+
+<% if (toast.length > 0) { %>
+    <div id="toast" class="toast-black toast show"><%= toast[0] %></div>
+<% } %>
+
+<script>
+    function moveToNext(current, nextFieldID) {
+        if (current.value.length === current.maxLength) {
+            if (nextFieldID) {
+                document.getElementById(nextFieldID).focus();
+            } else {
+                current.blur(); // Unfocus the current input if it's the last one
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.classList.add('show');
+            // Hide the toast message after 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 7000);
+        }
+    });
+
+    let otpExpirationTime = 60; // OTP expiration time in seconds
+    let resendCooldownTime = 60; // Cooldown time for resend in seconds
+    let resendCooldownInterval;
+    let countdownInterval;
+
+    function startResendCooldown() {
+        let secondsLeft = localStorage.getItem('cooldownSecondsLeft') || resendCooldownTime;
+        document.getElementById('resendBtn').style.display = 'none'; // Hide resend button during cooldown
+        document.getElementById('cooldownTimer').innerText = `    `; // Display cooldown timer message
+
+        if (resendCooldownInterval) {
+            clearInterval(resendCooldownInterval);
+        }
+
+        resendCooldownInterval = setInterval(() => {
+            secondsLeft--;
+            document.getElementById('cooldownTimer');
+            localStorage.setItem('cooldownSecondsLeft', secondsLeft);
+            if (secondsLeft <= 0) {
+                clearInterval(resendCooldownInterval);
+                document.getElementById('resendBtn').innerText = 'Resend OTP';
+                document.getElementById('resendBtn').style.display = 'inline-block'; // Show resend button after cooldown
+                document.getElementById('cooldownTimer').innerText = '';
+                localStorage.removeItem('cooldownSecondsLeft');
+            }
+        }, 1000);
+    }
+
+    function startOTPTimer() {
+        let secondsLeft = localStorage.getItem('otpExpirationTime') || otpExpirationTime;
+
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+
+        countdownInterval = setInterval(() => {
+            secondsLeft--;
+            let minutes = Math.floor(secondsLeft / 60);
+            let seconds = secondsLeft % 60;
+            document.getElementById('otpExpirationMessage').innerText = `OTP will expire in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            localStorage.setItem('otpExpirationTime', secondsLeft);
+            if (secondsLeft <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('otpExpirationMessage').innerText = 'OTP has expired. Please resend OTP.';
+                localStorage.removeItem('otpExpirationTime');
+                document.getElementById('resendBtn').style.display = 'inline-block'; // Show resend button when OTP expires
+            }
+        }, 1000);
+    }
+
+    function resendOtp() {
+        if (!resendCooldownInterval) {
+            // Reset OTP timer
+            localStorage.removeItem('otpExpirationTime');
+            startOTPTimer();
+            startResendCooldown();
+        }
+    }
+
+    function validateOtp() {
+        const otpInputs = document.querySelectorAll('.otp-input');
+        let otpValue = '';
+        otpInputs.forEach(input => {
+            otpValue += input.value;
+        });
+
+        const OTP_REGEX = /^[\d]{6}$/;
+        const err = document.getElementById("errmesg-otp");
+
+        if (!OTP_REGEX.test(otpValue)) {
+            err.innerHTML = 'OTP must be a 6-digit number';
+            otpInputs.forEach(input => {
+                input.classList.add('is-invalid');
+                input.classList.remove('is-valid');
+            });
+            return false;
+        } else {
+            err.innerHTML = '';
+            otpInputs.forEach(input => {
+                input.classList.remove('is-invalid');
+                input.classList.add('is-valid');
+            });
+            return true;
+        }
+    }
+
+    function validateForm() {
+        const isOtpValid = validateOtp();
+
+        if (!isOtpValid) {
+            alert('Enter a valid OTP');
+            return false;
+        }
+        return true;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        startOTPTimer();
+        startResendCooldown();
+    });
+</script>
+<%- include('../layout/footer') %>

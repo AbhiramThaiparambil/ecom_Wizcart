@@ -1,0 +1,845 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>Wizcart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
+	
+
+	<link rel="stylesheet" href="/css/mystyle.css">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Ion Icon Fonts-->
+	<link rel="stylesheet" href="css/ionicons.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+      <!-- fontAwesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+	<body>
+
+		<style>
+			.profile {
+				position: absolute;
+				top: -100px;
+				left: 700px;
+				right: 0px;
+			}
+		
+			.zoom-img {
+				overflow: hidden;
+				position: relative;
+			}
+		
+			.zoom-img img {
+				display: block;
+				width: 100%;
+				height: auto;
+				transition: transform 0.3s ease;
+			}
+		
+			.zoom-img:hover img {
+				transform: scale(1.2); /* Increased zoom effect on hover */
+			}
+
+			
+
+
+.button-container {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Adjust the space between the buttons */
+    }
+
+    .btn-addtocart,
+    .button-wishlist {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+
+
+
+
+
+	
+		</style>
+
+		<style>
+			.product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px 0;
+}
+
+.btn-action {
+    flex: 1 1 calc(50% - 5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-action .icon {
+    margin-right: 8px;
+}
+
+.btn-cart {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-cart:hover {
+    background-color: #45a049;
+}
+
+.btn-wishlist {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border: 2px solid #343a40;
+}
+
+.btn-wishlist:hover, .btn-wishlist.active {
+    background-color: #343a40;
+    color: white;
+}
+
+.btn-goto-cart {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+}
+
+.btn-goto-cart:hover {
+    background-color: #0056b3;
+}
+
+#goToCartContainer {
+    width: 100%;
+    margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+    .btn-action {
+        flex: 1 1 100%;
+    }
+}
+		</style>
+		
+	<div class="colorlib-loader"></div>
+
+	<div id="page">
+		<nav class="colorlib-nav" role="navigation">
+			<div class="top-menu">
+				<div class="container">
+					<div class="row">
+						
+                        <div class="d-flex align-items-center col-sm-7 col-md-9 font-monospace">
+							<i class="fa-brands fa-wizards-of-the-coast" style="color: #000000; font-size: 3rem;  "></i>
+							<div id="colorlib-logo">Wizcart</div>
+						</div>
+
+
+		         </div>
+					<div class="row">
+						<div class="col-sm-12 text-left menu-1">
+							<ul>
+								<li class="active"><a href="/Wizcart">Home</a></li>
+								 
+								<li><a href="">upcoming launches</a></li>
+								<li><a href="">About</a></li>
+								<li><a href="">Contact</a></li>
+								
+
+								<% if (typeof user !== 'undefined') { %>
+									<li class="has-dropdown profile" style="color: rgb(0, 0, 0);">
+									  <a  style="background-color:#88c8bc67"   >
+										<i class="fa-solid fa-user fa-bounce" style="color: #000000; font-size: 1.5rem;"></i>
+										<%= user.name %>
+										
+									  </a>
+									  
+									  <ul class="dropdown" style="background-color:#88c8bc;">
+										<li><a class="text-dark" href=""><i class="fa-solid fa-wallet"></i>wallet</a></li>
+										<li><a class="text-dark" href=""><i class="fa-solid fa-truck" style="color: #000000;"></i>my orders</a></li>
+										<li><a class="text-dark" href=""><i class="fa-solid fa-heart" style="color: #000000;"></i>Wishlist</a></li>
+										<li><a class="text-dark" href="/logout"><i class="fa-solid fa-right-from-bracket" style="color: #000000;"></i>Log Out</a></li>
+									  </ul>
+									</li>
+									<% } else { %>
+
+										<li class="has-dropdown profile  " style="color: aliceblue;">
+										
+										</li>
+
+
+
+									  <% } %>
+
+
+
+
+								 
+								
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="sale">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-8 offset-sm-2 text-center">
+							<div class="row">
+								<div class="owl-carousel2">
+									<div class="item">
+										
+									</div>
+									<div class="item">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<p class="bread"><span><a href="/Wizcart"> Home</a></span> / <span>Product Details</span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="colorlib-product">
+			<div class="container">
+				<div class="row row-pb-lg product-detail-wrap">
+
+                    
+                    <div class="col-sm-6">
+						
+						<div class="owl-carousel " style="width: 450px;">
+							<% singleProduct.product_img.forEach(e => { %>
+								<div class="item">
+									<div class="product-entry border zoom-img">
+										<a href="#" class="prod-img">
+											<img src="<%= e %>" class="img-fluid"  alt="Product Image">
+										</a>
+									</div>
+								</div>
+							<% }) %>
+						</div>
+            </div>
+
+					<div class="col-sm-6">
+						
+							<p style="margin-left:25px; color: #000000; font-weight: bold;"><%=singleProduct.product_name %></p>
+							<h3></h3>
+							<p class="price">
+								<span style="font-size: 24px; font-weight: bold; color: #000000; margin-left: 25px;">₹<%= singleProduct.price %></span>
+<% 
+var difference = singleProduct.Maximum_Retail_Price - singleProduct.price;
+var discountPercentage = (difference / singleProduct.Maximum_Retail_Price) * 100;
+%>
+<% if (difference > 0) { %>
+    <span style="color: rgb(52, 52, 52); margin-left: 10px; font-weight: lighter; font-size: 18px;">
+        <del>₹<%= singleProduct.Maximum_Retail_Price %></del>
+    </span>
+    <span style="color: green; margin-left:  10px; font-weight: 700;">
+        <%= discountPercentage.toFixed(2) %>% off
+    </span>
+<% } else { %>
+    <span style="color: green; margin-left: 10px; font-weight: 700;">0% off</span>
+<% } %>
+
+<div class="product-desc">
+								<input type="text" id="priceInput" hidden value="<%=singleProduct.price%>">
+								<span class="rate">
+									<i class="icon-star-full"></i>
+									<i class="icon-star-full"></i>
+									<i class="icon-star-full"></i>
+									<i class="icon-star-full"></i>
+									<i class="icon-star-half"></i>
+									(74 Rating)
+								</span>
+							</p>
+							<p><%= singleProduct.product_description%></p>
+							<!-- <div class="size-wrap">
+								<div class="block-26 mb-2">
+									<h4>Size</h4>
+				               <ul>
+				                  <li><a href="#">7</a></li>
+				                  <li><a href="#">7.5</a></li>
+				                  <li><a href="#">8</a></li>
+				                  <li><a href="#">8.5</a></li>
+				                  <li><a href="#">9</a></li>
+				                  <li><a href="#">9.5</a></li>
+				                  <li><a href="#">10</a></li>
+				                  <li><a href="#">10.5</a></li>
+				                  <li><a href="#">11</a></li>
+				                  <li><a href="#">11.5</a></li>
+				                  <li><a href="#">12</a></li>
+				                  <li><a href="#">12.5</a></li>
+				                  <li><a href="#">13</a></li>
+				                  <li><a href="#">13.5</a></li>
+				                  <li><a href="#">14</a></li>
+				               </ul>
+				            </div>
+				            <div class="block-26 mb-4">
+									<h4>Width</h4>
+				               <ul>
+				                  <li><a href="#">M</a></li>
+				                  <li><a href="#">W</a></li>
+				               </ul>
+				            </div>
+							</div> -->
+							<div class="col-md-7">
+                     <div class="input-group mb-4">
+                     	<span class="input-group-btn">
+                        	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+                           <i class="icon-minus2"></i>
+                        	</button>
+                    		</span>
+                     	<input type="text" id="quantity" name="quantity" class="form-control input-number"   value="1" min="1" max="100">
+                     	<span class="input-group-btn ml-1">
+                        	<button type="button" class="quantity-right-plus btn" data-type="plus"  data-field="">
+                             <i class="icon-plus2"></i>
+                         </button>
+                     	</span>
+						
+						<input type="text" hidden  id="hiddenProductId" value="<%=singleProduct._id%>">
+                  	</div>
+				</div>
+                  	<div class="row">
+						<div class="col-sm-12 text-center"> 
+							<!-- Add to Cart Button -->
+							<div class="product-actions">
+								<button id="addToCartButton" class="btn-action btn-cart" onclick="addtoCart()">
+									<span class="icon"><i class="fas fa-shopping-cart"></i></span>
+									<span class="text">Add to Cart</span>
+								</button>
+								
+								<% if (typeof existingWishlist === 'undefined' || existingWishlist === null) { %>
+									<input type="hidden" id="wishlist_id" value="<%=singleProduct._id%>">
+									<button id="wishListBTN" class="btn-action btn-wishlist" onclick="addtoWishlist()">
+										<span class="icon"><i class="far fa-heart"></i></span>
+										<span class="text">Wishlist</span>
+									</button>
+                                    
+									<button class="btn-action btn-wishlist active"  style="display: none;" id="afterClick" disabled>
+										<span class="icon"><i class="fas fa-heart"></i></span>
+										<span class="text">In Wishlist</span>
+									</button>
+
+
+								<% } else { %>
+									<button class="btn-action btn-wishlist active" disabled>
+										<span class="icon"><i class="fas fa-heart"></i></span>
+										<span class="text">In Wishlist</span>
+									</button>
+								<% } %>
+								
+								<div id="goToCartContainer" style="display: none;">
+									<a href="/cart" class="btn-action btn-goto-cart">
+										<span class="icon"><i class="fas fa-arrow-right"></i></span>
+										<span class="text">Go to Cart</span>
+									</a>
+								</div>
+							</div>
+							<!-- Go to Cart Button -->
+							
+							<!-- Stock Alerts -->
+							<% if (singleProduct.in_stock == 0) { %>
+								<div class="stock-alert text-danger">
+									<i class="fas fa-exclamation-triangle stock-alert-icon"></i>
+									<strong>OUT OF STOCK!!</strong>
+								</div>
+							<% } else if (singleProduct.in_stock <= 5) { %>
+								<div class="stock-alert text-danger">
+									<i class="fas fa-exclamation-circle stock-alert-icon"></i>
+									<strong>Hurry up!!</strong>
+									<p class="mb-0">Only <%= singleProduct.in_stock %> left in stock!</p>
+								</div>
+							<% } else if (singleProduct.in_stock <= 10) { %>
+								<div class="stock-alert text-danger">
+									<i class="fas fa-exclamation-circle stock-alert-icon"></i>
+									<strong>Hurry up!!</strong>
+									<p class="mb-0">Limited stock left!</p>
+								</div>
+							<% } %>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-md-12 pills">
+								<div class="bd-example bd-example-tabs">
+								  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+								    <li class="nav-item">
+								      <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Description</a>
+								    </li>
+								    <li class="nav-item">
+								      <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Manufacturer</a>
+								    </li>
+								    <li class="nav-item">
+								      <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+								    </li>
+								  </ul>
+
+								  <div class="tab-content" id="pills-tabContent">
+								    <div class="tab-pane border fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+								     
+										
+										<ul>
+											<li><%= singleProduct.product_description%></li>
+											
+										</ul>
+								    </div>
+
+								    <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+								      <p></p>
+										<p>.</p>
+								    </div>
+
+								    <div class="tab-pane border fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+								      <div class="row">
+								   		<div class="col-md-8">
+								   			<h3 class="head">23 Reviews</h3>
+								   			<div class="review">
+										   		<div class="user-img" style="background-image: url(images/person1.jpg)"></div>
+										   		<div class="desc">
+										   			<h4>
+										   				<span class="text-left">Jacob Webb</span>
+										   				<span class="text-right">14 March 2018</span>
+										   			</h4>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-half"></i>
+										   					<i class="icon-star-empty"></i>
+									   					</span>
+									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+										   			</p>
+										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+										   		</div>
+										   	</div>
+										   	<div class="review">
+										   		<div class="user-img" style="background-image: url(images/person2.jpg)"></div>
+										   		<div class="desc">
+										   			<h4>
+										   				<span class="text-left">Jacob Webb</span>
+										   				<span class="text-right">14 March 2018</span>
+										   			</h4>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-half"></i>
+										   					<i class="icon-star-empty"></i>
+									   					</span>
+									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+										   			</p>
+										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+										   		</div>
+										   	</div>
+										   	<div class="review">
+										   		<div class="user-img" style="background-image: url(images/person3.jpg)"></div>
+										   		<div class="desc">
+										   			<h4>
+										   				<span class="text-left">Jacob Webb</span>
+										   				<span class="text-right">14 March 2018</span>
+										   			</h4>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-half"></i>
+										   					<i class="icon-star-empty"></i>
+									   					</span>
+									   					<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+										   			</p>
+										   			<p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+										   		</div>
+										   	</div>
+								   		</div>
+								   		<div class="col-md-4">
+								   			<div class="rating-wrap">
+									   			<h3 class="head">Give a Review</h3>
+									   			<div class="wrap">
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					(98%)
+									   					</span>
+									   					<span>20 Reviews</span>
+										   			</p>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-empty"></i>
+										   					(85%)
+									   					</span>
+									   					<span>10 Reviews</span>
+										   			</p>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					(70%)
+									   					</span>
+									   					<span>5 Reviews</span>
+										   			</p>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					(10%)
+									   					</span>
+									   					<span>0 Reviews</span>
+										   			</p>
+										   			<p class="star">
+										   				<span>
+										   					<i class="icon-star-full"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					<i class="icon-star-empty"></i>
+										   					(0%)
+									   					</span>
+									   					<span>0 Reviews</span>
+										   			</p>
+										   		</div>
+									   		</div>
+								   		</div>
+								   	</div>
+								    </div>
+								  </div>
+								</div>
+				         </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer id="colorlib-footer" role="contentinfo">
+			<div class="container">
+				<div class="row row-pb-md">
+					<div class="col footer-col colorlib-widget">
+						<h4>About Footwear</h4>
+						<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+						<p>
+							<ul class="colorlib-social-icons">
+								<li><a href="#"><i class="icon-twitter"></i></a></li>
+								<li><a href="#"><i class="icon-facebook"></i></a></li>
+								<li><a href="#"><i class="icon-linkedin"></i></a></li>
+								<li><a href="#"><i class="icon-dribbble"></i></a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>Customer Care</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#">Contact</a></li>
+								<li><a href="#">Returns/Exchange</a></li>
+								<li><a href="#">Gift Voucher</a></li>
+								<li><a href="#">Wishlist</a></li>
+								<li><a href="#">Special</a></li>
+								<li><a href="#">Customer Services</a></li>
+								<li><a href="#">Site maps</a></li>
+							</ul>
+						</p>
+					</div>
+					<div class="col footer-col colorlib-widget">
+						<h4>Information</h4>
+						<p>
+							<ul class="colorlib-footer-links">
+								<li><a href="#">About us</a></li>
+								<li><a href="#">Delivery Information</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="#">Support</a></li>
+								<li><a href="#">Order Tracking</a></li>
+							</ul>
+						</p>
+					</div>
+
+					<div class="col footer-col">
+						<h4>News</h4>
+						<ul class="colorlib-footer-links">
+							<li><a href="blog.html">Blog</a></li>
+							<li><a href="#">Press</a></li>
+							<li><a href="#">Exhibitions</a></li>
+						</ul>
+					</div>
+
+					<div class="col footer-col">
+						<h4>Contact Information</h4>
+						<ul class="colorlib-footer-links">
+							<li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+							<li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+							<li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+							<li><a href="#">yoursite.com</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copy">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<p>
+							<span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span> 
+							<span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+   <!-- popper -->
+   <script src="js/popper.min.js"></script>
+   <!-- bootstrap 4.1 -->
+   <script src="js/bootstrap.min.js"></script>
+   <!-- jQuery easing -->
+   <script src="js/jquery.easing.1.3.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Date Picker -->
+	<script src="js/bootstrap-datepicker.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script>
+		$(document).ready(function(){
+
+		var quantitiy=1;
+		   $('.quantity-right-plus').click(function(e){
+		        
+		        // Stop acting like a button
+		        e.preventDefault();
+		        // Get the field name
+		        var quantity = parseInt($('#quantity').val());
+		        
+		        // If is not undefined
+		            
+		            $('#quantity').val(quantity + 1);
+
+		          
+		            // Increment
+		        
+		    });
+
+		     $('.quantity-left-minus').click(function(e){
+
+				e.preventDefault();
+		       
+		        var quantity = parseInt($('#quantity').val());
+		        
+		     
+		      
+		            // Increment
+		            if(quantity>0){
+		            $('#quantity').val(quantity - 1);
+		            }
+		    });
+		    
+		});
+
+
+		
+
+
+		function addtoWishlist() {
+    const productId = document.getElementById('wishlist_id').value;
+    const button = document.getElementById('wishListBTN');
+
+    if (!productId) {
+        alert('Product ID is missing');
+        return;
+    }
+
+    // Disable the button to prevent multiple clicks
+    // button.innerHTML = 'In Wishlist';
+	button.style.display = 'none';
+		document.getElementById('afterClick').style.display='block'
+    button.style.pointerEvents = 'none';
+
+    fetch('/addtowishlist', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ productId: productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Optionally update the UI or provide feedback to the user
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Re-enable the button if there's an error
+        button.innerHTML = '<i class="fa-regular fa-heart" style="color: #ffffff;"></i> Wishlist';
+        button.style.pointerEvents = 'auto';
+    });
+}
+
+
+
+
+
+		
+function addtoCart() {
+    const stock = <%=singleProduct.in_stock %>;
+    
+    if (stock === 0) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'bottom',
+            showConfirmButton: false,
+            timer: 7000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            },
+            background: '#dc3545',
+            color: 'white'
+        });
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Product out of stock',
+            text: 'We apologize for the inconvenience.'
+        });
+
+        return;
+    }
+
+    const quantity = document.getElementById('quantity').value;
+    const productId = document.getElementById('hiddenProductId').value;
+    const price = document.getElementById('priceInput').value;
+
+    // Update UI before redirect
+    document.getElementById('addToCartButton').style.display = 'none';
+    document.getElementById('goToCartContainer').style.display = 'block';
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Successfully added item to cart'
+    });
+
+    // Redirect after UI update
+    window.location.href = `/addtocart?productId=${productId}&quantity=${quantity}&price=${quantity * price}`;
+}
+
+window.onload = function() {
+    const isCartExist = '<%= isCartexist %>';
+    if (isCartExist === '1') {
+        document.getElementById('addToCartButton').style.display = 'none';
+        document.getElementById('goToCartContainer').style.display = 'block';
+    }
+};
+
+
+
+
+
+	</script>
+
+
+	</body>
+</html>

@@ -1,0 +1,719 @@
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="/css/mystyle.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<div class="colorlib-loader"></div>
+
+<div id="page">
+    
+
+ <nav class="colorlib-nav" role="navigation">
+    <div class="top-menu">
+      <div class="container">
+        <div class="row">
+          <div class="d-flex align-items-center col-sm-7 col-md-9 font-monospace">
+            <i class="fa-brands fa-wizards-of-the-coast" style="color: #000000; font-size: 3rem;  "></i>
+            <div id="colorlib-logo">Wizcart</div>
+          </div>
+          <div class="col-sm-5 col-md-3 " style="margin-left: -104px">
+            <form action="" class="search-wrap">
+              <div class="form-group">
+                <input type="search" class="form-control search" style="margin-top: 5px; margin-left: 3px;" placeholder="Search">
+                <button class="btn btn-primary submit-search text-center" style="margin-top: 27px; border-radius: 40px;" type="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-left menu-1">
+          
+            <% if (typeof user !== 'undefined') { %>
+                <div  class="dropdown profile">
+                    <a class="btn  dropdown-toggle text-white" style="background-color: #2c313098;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user " style="color: #000000; font-size: 1.5rem;"></i> <%= user.name %>
+                    </a>
+            
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-file-invoice"></i> MY ACCOUNT</a></li>
+                        <li><a class="dropdown-item" href=""><i class="fa-solid fa-truck"></i> My Orders</a></li>
+                        <li><a class="dropdown-item" href="/wallet"><<i class="fa-solid fa-wallet" style="color: #000000;"></i></i>WALLET</a></li>
+
+                        <li><a class="dropdown-item" href=""><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+                        <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                    </ul>
+                </div>
+                <% }  %>
+									
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sale " style="background-color:  #88c8bc51;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 offset-sm-2 text-center ">
+            <div class="row">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p class="bread"><span><a href="/home">Home</a></span> / <span>My Cart</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="colorlib-product">
+        <div class="container">
+            <div class="row row-pb-lg">
+                <div class="col-md-10 offset-md-1">
+                    <div class="process-wrap">
+                        <div class="process text-center active">
+                            <p><span>01</span></p>
+                            <h3>Shopping Cart</h3>
+                        </div>
+                        <div class="process text-center">
+                            <p><span>02</span></p>
+                            <h3>Checkout</h3>
+                        </div>
+                        <div class="process text-center">
+                            <p><span>03</span></p>
+                            <h3>Order Complete</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-pb-lg">
+                <div class="col-md-12">
+                    
+
+                    <div class="product-name d-flex">
+                        <div class="one-forth text-left px-4">
+                            <span>Product Details</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Price</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Quantity</span>
+                        </div>
+                        <div class="one-eight text-center">
+                            <span>Total</span>
+                        </div>
+                        <div class="one-eight text-center px-4">
+                            <span>Remove</span>
+                        </div>
+                    </div>
+
+           
+                   
+
+
+
+                
+                      
+                    <% if (typeof cartItems !== 'undefined' && cartItems.length > 0) { %>
+                       
+
+
+                    
+                
+                        <% cartItems.forEach(item => { %>
+                            <div class="product-cart d-flex">
+                                <div class="one-forth">
+                                    <div class="product-img" style="background-image: url(<%=item.productDetails.product_img[1]%>)">
+                                        <img src="<%= item.productDetails.product_img[0] %>" alt="<%= item.productDetails.product_name %>">
+                                    </div>
+                                    <div class="display-tc">
+                                        <h2 style="font-size: 25px;" class="ml-5 pl-5 display-6"><%= item.productDetails.product_name %></h2>
+                                    </div>
+                                </div>
+                                <input type="text" hidden class="productStock" value="<%= item.productDetails.in_stock %>" >
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <span class="price item-price"><%= item.productDetails.price %></span>
+                                    </div>
+                                </div>
+                        
+                                
+                                    <input type="text" class="productId" value="<%= item.productId %>" hidden>
+                                    <div class="d-flex align-items-center">
+                                        <button type="button" class="btn btn-light decrement-btn" style="border: 0.5px solid rgb(56, 56, 56);">
+                                            <i class="fa-solid fa-minus" style="color: #000000;"></i>
+                                        </button>
+                                        <span class="quantity ml-1 mr-2"><%= item.quantity %></span>
+                                        
+                                            <button type="button" class="btn btn-light increment-btn" style="border: 0.5px solid rgb(56, 56, 56);">
+                                                <i class="fa-solid fa-plus" style="color: #000000;"></i>
+                                            </button>
+                                       
+                                        
+                                    </div>
+                                    <div class="one-eight text-center">
+                                        <div class="display-tc">
+                                            <span class="price total-price"><%= item.quantity * item.productDetails.price %></span>
+                                        </div>
+                                    </div>
+                                 
+                        
+                                <div class="one-eight text-center">
+                                    <div class="display-tc">
+                                        <input type="text" class="removeId" hidden value="<%= item.productId %>" >
+                                        <a class="removeItem closed"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                        
+                        
+                    <div class="row row-pb-lg">
+                        <div class="col-md-12">
+                            <div class="total-wrap">
+                                <div class="row">
+                                  <div class="col-sm-8">
+                                    <form action="#">
+                                        <div class="row form-group">
+                                            <div class="col-sm-9">
+                                                <input type="text"  id="Coupon" class="form-control input-number" hidden placeholder="Your Coupon Number...">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="button" onclick="" hidden value="Apply Coupon" class="btn btn-primary">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                    <div class="col-sm-4 text-center">
+                                        <div class="total">
+                                            <div class="sub" >
+                                                <p>PRICE DETAILS</p>
+                                                <br>
+                                                 <hr>
+                                                 <br>
+                                                
+                                                
+             
+
+                                                <p><span class="pd-priceTitle">Price  (<%=cartItems.length %>)items</span><span id="pd-Total"><%=totalAmount %></span></p>
+                                                <p><span >Delivery Charges:</span> <span class="pd-delivery-charges">Free</span></p>
+                                                
+                                            </div>
+                                            <div class="grand-total">
+                                                <p><span><strong>Total:</strong></span> <span id="total-afterDiscount"></span></p>
+                                                  
+
+                                               
+                                             
+                                          
+                                                <br>
+                                                <hr>
+                                                <a href="/checkout"><button type="button" style="width: 385px; height: 40px;"   class="btn btn-secondary  mt-3">place order</button></a>
+                                            </div>
+                                        </div> 
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                   
+   
+
+                   
+                </div>
+            </div>
+
+            
+            <% } else { %>
+                <!-- Cart is empty, display empty cart message -->
+                <div class="container">
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-md-6 text-center">
+                            <div class="mb-4">
+                                <span class="icon">📱</span>
+                                <span class="icon">💡</span>
+                                <span class="icon">📘</span>
+                                <span class="laptop-icon">💻</span>
+                                <span class="icon">👕</span>
+                                <span class="icon">🚗</span>
+                                <span class="icon">🏠</span>
+                            </div>
+                            <h4 class="mb-3">Your cart is empty!</h4>
+                            <p class="text-muted mb-4">Add items to it now.</p>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+            <div class="row">
+                <div class="col-sm-8 offset-sm-2 text-center colorlib-heading colorlib-heading-sm">
+                    <h2>Shop more</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-lg-3 mb-4 text-center">
+                    <div class="product-entry border">
+                        <a href="#" class="prod-img">
+                            <img src="images/item-1.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                        </a>
+                        <div class="desc">
+                            <h2><a href="#">Women's Boots Shoes Maca</a></h2>
+                            <span class="price">$139.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+    <footer id="colorlib-footer" role="contentinfo">
+        <div class="container">
+            <div class="row row-pb-md">
+                <div class="col footer-col colorlib-widget">
+                    <h4>About Footwear</h4>
+                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+                    <p>
+                        <ul class="colorlib-social-icons">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-linkedin"></i></a></li>
+                            <li><a href="#"><i class="icon-dribbble"></i></a></li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="col footer-col colorlib-widget">
+                    <h4>Customer Care</h4>
+                    <p>
+                        <ul class="colorlib-footer-links">
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Returns/Exchange</a></li>
+                            <li><a href="#">Gift Voucher</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                            <li><a href="#">Special</a></li>
+                            <li><a href="#">Customer Services</a></li>
+                            <li><a href="#">Site maps</a></li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="col footer-col colorlib-widget">
+                    <h4>Information</h4>
+                    <p>
+                        <ul class="colorlib-footer-links">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Delivery Information</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Order Tracking</a></li>
+                        </ul>
+                    </p>
+                </div>
+
+                <div class="col footer-col">
+                    <h4>News</h4>
+                    <ul class="colorlib-footer-links">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Exhibitions</a></li>
+                    </ul>
+                </div>
+
+                <div class="col footer-col">
+                    <h4>Contact Information</h4>
+                    <ul class="colorlib-footer-links">
+                        <li>291 South 21th Street, <br> Suite 721 New York NY 10016</li>
+                        <li><a href="tel://1234567920">+ 1235 2355 98</a></li>
+                        <li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
+                        <li><a href="#">yoursite.com</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <p>
+                        <span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span> 
+                        <span class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a> , <a href="http://pexels.com/" target="_blank">Pexels.com</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
+</div>
+
+
+
+
+
+
+
+<!-- 
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toast = document.getElementById('toast');
+    if (toast) {
+      toast.classList.add('show');
+
+
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  });
+
+
+
+
+document.querySelectorAll('.decrement-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const quantityElement = this.nextElementSibling;
+        let currentQuantity = parseInt(quantityElement.innerText, 10);
+        const itemPriceElement = this.closest('.product-cart').querySelector('.item-price');
+            totalPriceElement = this.closest('.product-cart').querySelector('.total-price');
+        let itemPrice = parseFloat(itemPriceElement.innerText);
+
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityElement.innerText = currentQuantity;
+            const productId = this.closest('.product-cart').querySelector('.productId').value;
+            
+            quantitiySent(productId,'dec')
+            totalPriceElement.innerText = (currentQuantity * itemPrice).toFixed(2);
+
+        }
+    });
+});
+
+
+
+ 
+document.querySelectorAll('.increment-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const quantityElement = this.previousElementSibling;
+        let currentQuantity = parseInt(quantityElement.innerText, 10);
+        const itemPriceElement = this.closest('.product-cart').querySelector('.item-price');
+         totalPriceElement = this.closest('.product-cart').querySelector('.total-price');
+        let itemPrice = parseFloat(itemPriceElement.innerText);
+        if (currentQuantity < 10) {
+            currentQuantity++;
+            quantityElement.innerText = currentQuantity;
+             
+
+            const productId = this.closest('.product-cart').querySelector('.productId').value;
+               totalPriceElement.innerText = (currentQuantity * itemPrice).toFixed(2);
+            quantitiySent(productId,'inc')
+        }
+    });
+});
+
+
+
+function quantitiySent(productId, currentQuantity) {
+    const data = {
+        product_id: productId,
+        currentQuantity: currentQuantity
+    };
+
+    fetch('/quantityUpdate', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+}
+
+
+
+
+</script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    
+   
+
+      function calculateGrandTotal() {
+        let grandTotal = 0;
+        document.querySelectorAll('.total-price').forEach(function(element) {
+          grandTotal += parseFloat(element.innerText);
+        });     
+        document.getElementById('pd-Total').innerText = grandTotal.toFixed(2);
+        document.getElementById('total-afterDiscount').innerText = grandTotal.toFixed(2);
+
+      }
+      document.querySelectorAll('.decrement-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const quantityElement = this.nextElementSibling;
+    let currentQuantity = parseInt(quantityElement.innerText, 10);
+    const itemPriceElement = this.closest('.product-cart').querySelector('.item-price');
+    const totalPriceElement = this.closest('.product-cart').querySelector('.total-price');
+    let itemPrice = parseFloat(itemPriceElement.innerText);
+
+    if (currentQuantity > 1) {
+      currentQuantity--;
+      quantityElement.innerText = currentQuantity;
+      const productId = this.closest('.product-cart').querySelector('.productId').value;
+
+      quantitiySent(productId, 'dec');
+      totalPriceElement.innerText = (currentQuantity * itemPrice).toFixed(2);
+      calculateGrandTotal();
+
+      Swal.fire({
+  position: 'bottom', 
+  title: '<span style="color: #4caf50; font-weight: bold;">✅ Quantity Updated</span>',
+  showConfirmButton: false,
+  timer: 1200,
+  background: '#ffffff', 
+  toast: true, 
+  customClass: {
+    popup: 'custom-swal-popup',
+    title: 'custom-swal-title',
+  },
+  didOpen: () => {
+    
+    const popup = Swal.getPopup();
+    popup.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+    popup.style.border = '1px solid #e0e0e0';
+    popup.style.borderRadius = '8px';
+  }
+});
+
+      const incrementBtn = this.closest('.product-cart').querySelector('.increment-btn');
+      incrementBtn.style.display = 'inline-block';
+    }
+  });
+});
+
+document.querySelectorAll('.increment-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const quantityElement = this.previousElementSibling;
+    let currentQuantity = parseInt(quantityElement.innerText, 10);
+    const itemPriceElement = this.closest('.product-cart').querySelector('.item-price');
+    const totalPriceElement = this.closest('.product-cart').querySelector('.total-price');
+    let itemPrice = parseFloat(itemPriceElement.innerText);
+    const inStock = parseInt(this.closest('.product-cart').querySelector('.productStock').value, 10);
+
+    if (currentQuantity < inStock && currentQuantity < 10) {
+      currentQuantity++;
+      quantityElement.innerText = currentQuantity;
+      const productId = this.closest('.product-cart').querySelector('.productId').value;
+
+      quantitiySent(productId, 'inc');
+      totalPriceElement.innerText = (currentQuantity * itemPrice).toFixed(2);
+      calculateGrandTotal();
+
+      Swal.fire({
+  position: 'bottom', // Place it in the bottom-right corner
+  title: '<span style="color: #4caf50; font-weight: bold;">✅ Quantity Updated</span>',
+  showConfirmButton: false,
+  timer: 1200,
+  background: '#ffffff', // White background
+  toast: true, // Make it look like a toast notification
+  customClass: {
+    popup: 'custom-swal-popup',
+    title: 'custom-swal-title',
+  },
+  didOpen: () => {
+    // Add a shadow and border for a more attractive look
+    const popup = Swal.getPopup();
+    popup.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+    popup.style.border = '1px solid #e0e0e0';
+    popup.style.borderRadius = '8px';
+  }
+});
+    
+    }else {
+      Swal.fire({
+          icon: 'warning',
+          title: 'Out of Stock',
+          text: 'You have reached the maximum stock limit.',
+          showConfirmButton: true
+        });
+ 
+    }
+
+  });
+});
+
+function quantitiySent(productId, currentQuantity) {
+  const data = {
+    product_id: productId,
+    currentQuantity: currentQuantity
+  };
+
+  fetch('/quantityUpdate', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+}
+
+// Initial calculation of grand total
+calculateGrandTotal();
+
+     
+document.querySelectorAll('.removeItem').forEach(button => {
+  button.addEventListener('click', (e) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4CAF50",
+      cancelButtonColor: "#f44336",
+      confirmButtonText: "Yes, delete it!",
+      background: '#333',
+      color: '#fff',
+      customClass: {
+        confirmButton: 'custom-confirm-button-class',
+        cancelButton: 'custom-cancel-button-class'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const removeId = e.target.closest('.product-cart').querySelector('.removeId').value;
+        const formData = {};
+
+        fetch(`/removeItem/id${removeId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => {
+          if (!response.ok) {
+            return response.json().then(errorData => {
+              throw new Error(errorData.message || 'Network response was not ok');
+            });
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Item removed successfully:', data);
+          
+          Swal.fire({
+  position: 'bottom', // Place it in the bottom-right corner
+  title: '<span style="color: #ff0000; font-weight: bold;">🗑️ Product removed form cart</span>',
+  showConfirmButton: false,
+  timer: 1200,
+  background: '#ffffff', // White background
+  toast: true, // Make it look like a toast notification
+  customClass: {
+    popup: 'custom-swal-popup',
+    title: 'custom-swal-title',
+  },
+  didOpen: () => {
+    // Add a shadow and border for a more attractive look
+    const popup = Swal.getPopup();
+    popup.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+    popup.style.border = '1px solid #e0e0e0';
+    popup.style.borderRadius = '8px';
+  }
+}).then(() => {
+            window.location.href = '/cart';
+          });
+        })
+        .catch(error => {
+          console.error('There was an error removing the item:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error removing item: ' + error.message,
+            background: '#333',
+            color: '#fff'
+          });
+        });
+      }
+    });
+  });
+});
+
+
+
+
+
+
+
+
+  </script>
+
+<%- include('../layout/footer') %>  

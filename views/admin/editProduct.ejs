@@ -1,0 +1,458 @@
+<%- include('./adminLayout/header') %>
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  
+  <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1b1a1a !important;"        >
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fab fa-wizards-of-the-coast" style="color: #ffffff;"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Wizcart<sup></sup></div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/salesReport?filter=today">
+            <i class="fas fa-file" style="color: #ffffff;"></i>
+                                 <span>sales report</span></a>
+    </li>
+
+
+   
+
+    <li class="nav-item active">
+      <a class="nav-link" href="/ledger">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>ledger book</span></a>
+  </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+
+    <li class="nav-item">
+        <a class="nav-link" href="/userList">
+            <i class="fas fa-fw fa fa-user"></i>
+          
+            <span>USER MANAGEMENT</span></a>
+    </li>
+
+   
+
+
+  
+
+    <li class="nav-item">
+      <a class="nav-link" href="/orderMangement">
+        <i class="fa-solid fa-truck-fast" style="color: #ffffff;"></i>
+        
+          <span>ORDER MANAGEMENT</span> </a>
+  </li>
+
+
+
+  <li class="nav-item">
+    <a class="nav-link" href="/returnOrders">
+        <i class="fa-solid fa-rotate-left" style="color: #ffffff;"></i>
+        <span>Return Orders</span>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+    <li class="nav-item">
+        <a class="nav-link" href="/couponMangement">
+            <i class="fa-solid fa-gift" style="color: #ffffff;"></i>              
+                 <span>COUPON MANAGEMENT</span></a>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link" href="/offerManagemanent">
+            <i class="fa-solid fa-chart-simple" style="color: #ffffff;"></i>             
+                 <span>Offer MANAGEMENT</span></a>
+    </li>
+
+
+
+
+
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+            aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-box" style="color: #ffffff;"></i>
+            <span>PRODUCTS</span>
+        </a>
+        <div id="collapseUtilities"  class="collapse" aria-labelledby="headingUtilities"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header" style="color: red;">  product management</h6>
+                <a class="collapse-item" style="background-color: rgb(0, 0, 0); color: #f0f2f5;" href="/addProduct"> <i class="fa-solid fa-box" style="color: #ff0000;"></i> ADD NEW PRODUCT</a>
+                <a class="collapse-item"  href="Products"> <i class="fa-solid fa-pen-to-square" style="color: #ff0400;"></i> EDIT PRODUCT</a>
+                <a class="collapse-item"  style="background-color: rgb(0, 0, 0); color: #f0f2f5;"  href="Products"> <i class="fa-solid fa-eye-slash" style="color: #ff0000;"></i> HIDE PRODUCT</a>
+                <a class="collapse-item"   href="Products"><i class="fa-solid fa-trash" style="color: #ff0000;" ></i>DELETE PRODUCT</a>
+            </div>
+        </div>
+    </li>
+
+
+  
+
+        <li class="nav-item">
+            <a class="nav-link" href="/category">
+                <i class="fas fa-boxes" style="color: #ffffff;"></i>
+                <span>CATEGORY MANAGEMENT</span> </a>
+        </li>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">CATEGORY</h6>
+                
+                
+                <a class="collapse-item" href="category"> CATEGORY</a>
+
+            </div>
+        </div>
+       
+    </li>
+
+    <li>
+        
+    </li>
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    
+    <div class="sidebar-heading">
+        PORFILE
+    </div>
+
+    
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>PORFILE</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Login Screens:</h6>
+                <a class="collapse-item" href="/logout"><i class="fas fa-sign-out-alt" style="color: #000000;"></i>Logout </a>
+              
+            </div>
+        </div>
+    </li>
+
+
+
+    
+   
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+
+</ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
+      </nav>
+      <!-- Begin Page Content -->
+      <div class="container" style="max-width: 600px; margin-top: 50px;">
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4>Add Product</h4>
+          </div>
+          <div class="card-body">
+            <form action="/loadEditProduct" method="post" enctype="multipart/form-data" onsubmit="submitForm(event)">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="productName" name="editProductName" value="<%= product.product_name %>">
+              </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" name="editProductCategory" value="<%= product.category_name %>">
+              </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="editProductPrice" value="<%= product.price %>">
+              </div>
+              <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" class="form-control" id="stock" name="editStock" value="<%= product.in_stock %>">
+              </div>
+              <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" name="editBrand" value="<%= product.brands %>">
+                <input type="text"  name="productId" value="<%=product.id%>">
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="3" name="editProductDescription"><%= product.product_description %></textarea>
+              </div>
+                    
+              
+              <div class="form-group">
+                <label for="image1">Image 1</label>
+                <input type="file" class="form-control-file" id="image1" name="images" accept="image/*" onchange="previewImage(event, 'imagePreview1')">
+                <img id="imagePreview1" width="400px" class="image-preview" alt="Image Preview">
+                <button type="button" class="btn btn-primary mt-2" id="btn-crop1" onclick="cropImage('imagePreview1', 'croppedImageData1', 'btn-crop1')">Crop Image</button>
+                <div class="cropped-container">
+                  <img id="croppedImage1" hidden>
+                </div>
+                <input type="hidden" style="width: 350px;" id="croppedImageData1" name="croppedImages">
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="image2">Image 2</label>
+                <input type="file" class="form-control-file" id="image2" name="images" accept="image/*"  onchange="previewImage(event, 'imagePreview2')">
+                <img id="imagePreview2"  width="400px" class="image-preview" alt="Image Preview">
+                <button type="button" class="btn btn-primary mt-2" id="btn-crop2" onclick="cropImage('imagePreview2', 'croppedImageData2', 'btn-crop2')">Crop Image</button>
+                <div class="cropped-container">
+                  <img id="croppedImage2" hidden>
+                </div>
+                <input type="hidden" id="croppedImageData2" name="croppedImages">
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="image3">Image 3</label>
+                <input type="file" class="form-control-file" id="image3" name="images" accept="image/*"  onchange="previewImage(event, 'imagePreview3')">
+                <img id="imagePreview3"  width="400px" class="image-preview" alt="Image Preview">
+                <button type="button" class="btn btn-primary mt-2" id="btn-crop3" onclick="cropImage('imagePreview3', 'croppedImageData3', 'btn-crop3')">Crop Image</button>
+                <div class="cropped-container">
+                  <img id="croppedImage3" hidden>
+                </div>
+                <input type="hidden" id="croppedImageData3" name="croppedImages">
+              </div>
+              <br>
+              <br>
+
+           
+
+
+              <% 
+              // Count the non-null images
+              var nonNullImages = product.product_img.filter(img => img !== null).length;
+              var maxImages = 3;
+              var remainingSlots = maxImages - nonNullImages;
+            %>
+            
+            <% for (var i = 0; i < remainingSlots; i++) { %>
+              <div class="form-group d-flex align-items-center mb-3">
+                <div class="mr-3">
+                  <label for="image<%= nonNullImages + i %>">Upload New Image <%= nonNullImages + i + 1 %></label>
+                  <input type="file" class="form-control-file" id="image<%= nonNullImages + i %>" name="editImage">
+                </div>
+              </div>
+              <br>
+              <br>
+              <br>
+              <hr>
+            <% } %>
+            
+                
+  
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+  
+             
+            <style>
+              .image-container {
+                width: 200px; /* Increase image container size */
+                height: 200px; /* Increase image container size */
+                position: relative;
+                margin: 10px;
+              }
+            
+              .delete-button {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+              }
+            
+              .image-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+              }
+            </style>
+            
+            <div class="image-row">
+              <% product.product_img.forEach((img, index) => { %>
+                <div class="form-group d-flex align-items-center mb-3 position-relative image-container">
+                  <img src="<%= img %>" class="img-fluid" alt="Image <%= index + 1 %>">
+                  <form action="/deleteImg" method="post" class="delete-button">
+                    <input type="text" hidden name="imageIndex" value="<%= index %>">
+                    <input type="text" hidden name="productId" value="<%= product.id %>">
+                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                  </form>
+                  <hr>
+                </div>
+              <% }); %>
+          </div>
+        </div>
+      </div>
+      <!-- End of Page Content -->
+    </div>
+    <!-- End of Main Content -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+<script>
+  // Validation functions
+  
+  
+
+
+
+
+
+
+  // Cropper.js functions
+  let cropper1, cropper2, cropper3;
+
+  function previewImage(event, previewId) {
+    const reader = new FileReader();
+    reader.onload = function() {
+      const output = document.getElementById(previewId);
+      output.src = reader.result;
+
+      if (cropper1) cropper1.destroy();
+      if (cropper2) cropper2.destroy();
+      if (cropper3) cropper3.destroy();
+
+      if (previewId === 'imagePreview1') {
+        cropper1 = new Cropper(output, { aspectRatio: 1 });
+      } else if (previewId === 'imagePreview2') {
+        cropper2 = new Cropper(output, { aspectRatio: 1 });
+      } else if (previewId === 'imagePreview3') {
+        cropper3 = new Cropper(output, { aspectRatio: 1 });
+      }
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  function cropImage(imagePreviewId, croppedImageDataId, cropButtonId) {
+    const cropButton = document.getElementById(cropButtonId);
+    let cropper;
+
+    if (imagePreviewId === 'imagePreview1') {
+      cropper = cropper1;
+    } else if (imagePreviewId === 'imagePreview2') {
+      cropper = cropper2;
+    } else if (imagePreviewId === 'imagePreview3') {
+      cropper = cropper3;
+    }
+
+    if (cropper) {
+      const croppedCanvas = cropper.getCroppedCanvas({
+        width: 332,
+        height: 332,
+      });
+      const croppedImageData = croppedCanvas.toDataURL('image/png');
+      document.getElementById(croppedImageDataId).value = croppedImageData;
+
+      if (cropButton.innerText === 'Crop Image') {
+        cropButton.innerText = 'Cropped';
+        cropButton.disabled = true;
+      } else {
+        cropButton.innerText = 'Crop Image';
+        cropButton.disabled = false;
+      }
+    }
+  }
+
+  function dataURLtoBlob(dataurl) {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+  }
+
+  function submitForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const croppedImageData1 = document.getElementById('croppedImageData1').value;
+    const croppedImageData2 = document.getElementById('croppedImageData2').value;
+    const croppedImageData3 = document.getElementById('croppedImageData3').value;
+
+    if (croppedImageData1) {
+      formData.append('croppedImages', dataURLtoBlob(croppedImageData1), 'croppedImage1.png');
+    }
+    if (croppedImageData2) {
+      formData.append('croppedImages', dataURLtoBlob(croppedImageData2), 'croppedImage2.png');
+    }
+    if (croppedImageData3) {
+      formData.append('croppedImages', dataURLtoBlob(croppedImageData3), 'croppedImage3.png');
+    }
+
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log('Success:', data);
+      window.location.href = '/Products';
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+  </script>
+<!-- End of Page Wrapper -->
+<%- include('../layout/footer') %>

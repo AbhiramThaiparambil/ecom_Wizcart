@@ -1,0 +1,227 @@
+<%- include('../layout/header') %>
+
+<link rel="stylesheet" href="css/mystyle.css">
+
+<div id="page">
+    <nav class="colorlib-nav" role="navigation">
+        <div class="top-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="d-flex align-items-center col-sm-7 col-md-9 font-monospace">
+                        <i class="fa-brands fa-wizards-of-the-coast" style="color: #000000; font-size: 3rem;"></i>
+                        <div id="colorlib-logo">Wizcart</div>
+                    </div>
+                    <div class="col-sm-5 col-md-3" style="margin-left: -104px">
+                        <form action="" class="search-wrap">
+                            <div class="form-group">
+                                <input type="search" class="form-control search" style="margin-top: 5px; margin-left: 3px;" placeholder="Search">
+                                <button class="btn btn-primary submit-search text-center" style="margin-top: 27px; border-radius: 40px;" type="submit"><i class="icon-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-left menu-1">
+                        <ul>
+                            <li class="active"><a href="/home">Home</a></li>
+                            <li><a href="">upcoming launches</a></li>
+                            <li><a href="">About</a></li>
+                            <li><a href="">Contact</a></li>
+                            <li class="cart">
+                                <a href="/cart">
+                                    <i class="icon-shopping-cart"></i>
+                                    CART
+                                    <% if (typeof cartQuantity !== 'undefined') { %>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <%=cartQuantity%>
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    <% } %>
+                                </a>
+                            </li>
+                            <% if (typeof user !== 'undefined') { %>
+                                <div class="dropdown profile" style="width: 100px;">
+                                    <a class="btn dropdown-toggle text-white" style="background-color: #2c313098;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-user" style="color: #000000; font-size: 1.5rem;"></i> <%=user.name %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-file-invoice"></i> MY ACCOUNT</a></li>
+                                        <li><a class="dropdown-item" href="/getOrderHistory"><i class="fa-solid fa-truck"></i> My Orders</a></li>
+                                        <li><a class="dropdown-item" href=""><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+                                        <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+                                    </ul>
+                                </div>
+                            <% } else { %>
+                                <div class="dropdown profile">
+                                    <a class="btn dropdown-toggle text-white" style="background-color: #2c313098;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-user" style="color: #000000; font-size: 1.5rem;"></i> LOGIN
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="/login"><i class="fa-solid fa-right-from-bracket"></i> LOGIN</a></li>
+                                    </ul>
+                                </div>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sale">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 offset-sm-2 text-center">
+                        <div class="row">
+                            <div class="owl-carousel2">
+                                <div class="item"></div>
+                                <div class="item"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <style>
+        .custom-breadcrumb {
+    background-color: transparent; /* No background color */
+    padding: 10px 15px; /* Add some padding */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1.1rem; /* Slightly larger font size */
+}
+
+.custom-breadcrumb .breadcrumb-item a {
+    color: #007bff; /* Bootstrap primary color for links */
+    text-decoration: none; /* Remove underline */
+    font-weight: 500; /* Medium font weight */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.custom-breadcrumb .breadcrumb-item.active a {
+    color: #6c757d; /* Darker gray for the active item */
+}
+
+.custom-breadcrumb .breadcrumb-item a:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+    </style>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb ms-5">
+            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+            <li class="breadcrumb-item active"><a >Wallet</a></li>
+        </ol>
+        
+    </nav>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .wallet-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .wallet-balance {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .transaction-list {
+            margin-top: 30px;
+        }
+        .transaction-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #4CAF50;
+            transition: transform 0.2s ease;
+        }
+         
+        .transaction-item1{
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #ff0000;
+            transition: transform 0.2s ease;
+        }
+      
+        
+
+        .transaction-item1:hover {
+            transform: translateY(-5px);
+        }
+
+        .transaction-item:hover {
+            transform: translateY(-5px);
+        }
+        .transaction-description {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .transaction-date {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .transaction-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+      
+      
+    </style>
+</head>
+<body>
+    <div class="wallet-container">
+        <div class="wallet-header">
+            <div>
+                <h1>My Wallet</h1>
+                <p class="wallet-balance">₹<%= balance.toFixed(2) %></p>
+            </div>
+            
+        </div>
+
+        <div class="transaction-list">
+            <% transactions.reverse().forEach(function(transaction) { %>
+                <% if (transaction.type === 'debited') { %>
+                    <div class="transaction-item1">
+                <% } else { %>
+                    <div class="transaction-item">
+                <% } %>
+                    <div>
+                        <p class="transaction-description"><%= transaction.description %></p>
+                        <p class="transaction-date"><%= new Date(transaction.date).toLocaleDateString() %></p>
+                    </div>
+                    <p class="transaction-amount text-<%= transaction.amount >= 0 ? 'success' : 'danger' %>">
+                        <%= transaction.type === 'debited' ? '-' : '+' %>₹<%= Math.abs(transaction.amount).toFixed(2) %>
+                    </p>
+                </div>
+            <% }) %>
+            
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<%- include('../layout/header') %>
+<link rel="stylesheet" href="/css/profileStyle.css">
+<link rel="stylesheet" href="css/mystyle.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<div class="colorlib-loader"></div>
+
+<div id="page">
+  <nav class="colorlib-nav" role="navigation">
+    <div class="top-menu">
+      <div class="container">
+        <div class="row">
+          <div class="d-flex align-items-center col-sm-7 col-md-9 font-monospace">
+            <i class="fa-brands fa-wizards-of-the-coast" style="color: #000000; font-size: 3rem;  "></i>
+            <div id="colorlib-logo">Wizcart</div>
+          </div>
+          <div class="col-sm-5 col-md-3 " style="margin-left: -104px">
+            <form action="" class="search-wrap">
+              <div class="form-group">
+                <input type="search" class="form-control search" style="margin-top: 5px; margin-left: 3px;" placeholder="Search">
+                <button class="btn btn-primary submit-search text-center" style="margin-top: 27px; border-radius: 40px;" type="submit"><i class="icon-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-left menu-1">
+          
+								<% if (typeof user !== 'undefined') { %>
+								    <div  class="dropdown profile">
+										<a class="btn  dropdown-toggle" style="background-color: #88c8bc98;" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="fa-solid fa-user " style="color: #000000; font-size: 1.5rem;"></i> <%= user.name %>
+										</a>
+								
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="/home"><i class="fa-solid fa-house" style="color: #000000;"></i>HOME</a></li>
+
+											<li><a class="dropdown-item" href="/profile"><i class="fa-solid fa-file-invoice"></i> MY ACCOUNT</a></li>
+											<li><a class="dropdown-item" href="/getOrderHistory"><i class="fa-solid fa-truck"></i> My Orders</a></li>
+											<li><a class="dropdown-item" href="/wallet"><<i class="fa-solid fa-wallet" style="color: #000000;"></i></i>WALLET</a></li>
+
+											<!-- <li><a class="dropdown-item" href=""><i class="fa-solid fa-heart"></i> Wishlist</a></li> -->
+											<li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+										</ul>
+									</div>
+									<% } else { %>
+
+										<li  class="has-dropdown profile "  style="color: aliceblue;">
+											<a  href="login"><i class="fa-regular " style="color: #000000;"></i>LOGIN</a>
+											<ul class="dropdown" style="background-color:#88c8bc;">
+												<li><a class="text-dark" href="login"><i class="fa-solid fa-wallet"></i>Login</a></li>
+												<!-- <li><a class="text-dark" href="order-complete.html"><i class="fa-solid fa-truck" style="color: #000000;"></i>my orders</a></li>
+												<li><a class="text-dark" href="add-to-wishlist.html"><i class="fa-solid fa-heart" style="color: #000000;"></i>Wishlist</a></li>
+												<li><a class="text-dark" href="product-detail.html"><i class="fa-solid fa-right-from-bracket" style="color: #000000;"></i>Log Out</a></li> -->
+											  </ul>
+										</li>
+
+
+
+									  <% } %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sale " style="background-color:  #88c8bc51;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 offset-sm-2 text-center ">
+            <div class="row">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+  
+
+  <div class="container light-style flex-grow-1 container-p-y">
+    <h4 class="font-weight-bold py-3 mb-4">Account settings</h4>
+    <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+            <div class="col-md-3 pt-0">
+                <div class="list-group list-group-flush account-settings-links">
+                    <a class="list-group-item " href="/PROFILE">Info</a>
+                    <a class="list-group-item "  href="/PROFILE">Change password</a>
+                    <a class="list-group-item list-group-item-action active"  data-bs-toggle="list" href="#account-general">Manage Address</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+              <button type="button" style="background-color: #88c8bca1;" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">Add New Address</button>
+             
+             
+             
+           
+              <input type="hidden" id="hiddenUserAddress" value='<%= JSON.stringify(user.address) %>'>
+             
+               
+              <% user.address.forEach((e,i)=> { %>
+                
+                <div class="container mt-5">
+                    <div class="card col-md-9">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row">
+                                <strong><%=e.name%></strong><%=e.mobile%>
+                               
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-link" style="color: #88c8bc;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item edit-btn"data-index='<%= JSON.stringify([i,e.name, e.mobile, e.pincode, e.locality, e.address, e.city, e.state, e.landmark, e.altmobile, e.addresstype]) %>' data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Edit</a></li>
+                                    <li><a class="dropdown-item"  onclick="deleteCofo()"> Delete</a> <input hidden type="number"  id="index" value="<%=i %>"></li>
+                                     
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <%=`${e.name}, ${e.mobile}, ${e.pincode}, address${e.address},${e.city},${e.state} `%>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                
+                <!-- EDIT AADRESS Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">EDIT ADDRESS</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="row g-3 needs-validation" action="/editAddress" method="post" novalidate>
+
+                                    <!-- Hidden input to store the index -->
+                                    <input type="hidden" id="addressIndex" name="addressIndex" >
+                                    
+                                    <div class="col-md-12">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" name="editName"  id="editName" pattern="[A-Za-z\s]+" required>
+                                       
+                                        <div class="invalid-feedback">
+                                            Please enter a valid name (letters and spaces only, no leading or trailing spaces).
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="mobile" class="form-label">10-digit mobile number </label>
+                                        <input type="text" class="form-control" id="editMobile"  name="editMobile" pattern="\d{10}" required>
+                                        <div class="invalid-feedback">
+                                            Please enter a valid 10-digit mobile number.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="pincode" class="form-label">Pincode</label>
+                                        <input type="text" class="form-control" name="editPincode" id="editPincode" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your pincode.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="locality" class="form-label">Locality</label>
+                                        <input type="text" class="form-control" name="editLocality" id="editLocality" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your locality.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="address" class="form-label">Address (Area and Street)</label>
+                                        <input type="text" class="form-control" name="editAddress" id="editAddress" required>
+                                        
+
+                                        <div class="invalid-feedback">
+                                            Please enter your address.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="city" class="form-label">City/District/Town</label>
+                                        <input type="text" class="form-control" name="editCity" id="editCity" required>
+                                        <div class="invalid-feedback">
+                                            Please enter your city.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="state" class="form-label">State</label>
+                                        <input type="text" class="form-control" name="editState" id="editState" required>
+                                      
+                                        <div class="invalid-feedback">
+                                            Please select your state.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="landmark" class="form-label">Landmark</label>
+                                        <input type="text" class="form-control" id="editLandmark" name="editLandmark" >
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="altmobile" class="form-label">Alternate Phone</label>
+                                        <input type="text" class="form-control" id="editAltmobile" name="editAltmobile" >
+                                        <div class="invalid-feedback">
+                                            Please enter a valid 10-digit mobile number.
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="addresstype" class="form-label">Address Type</label>
+                                        <select class="form-select" id="editAddresstype" name="editAddresstype" required>
+                                            <option value="" disabled selected>Select address type</option>
+                                            <option value="home">Home</option>
+                                            <option value="office">Office</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select address type.
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="EditsubmitBtn">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+              <br>
+              <br>
+              <br>
+
+              <!-- The Modal -->
+               <!-- addNew address -->
+              <div class="modal fade mt-5" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                              <h4 class="modal-title" id="myModalLabel">Add New Address</h4>
+                              <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+
+                              <form class="row g-3 needs-validation"  novalidate id="addAddressForm" >
+                                  <div class="col-md-12">
+                                      <label for="name" class="form-label">Name</label>
+                                      <input type="text" id="addressIndex" name="addressIndex">
+
+                                      <input type="text" class="form-control" name="name" id="name" pattern="[A-Za-z\s]+" required>
+                                      <div class="invalid-feedback">
+                                          Please enter a valid name (letters and spaces only, no leading or trailing spaces).
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="mobile" class="form-label">10-digit mobile number</label>
+                                      <input type="text" class="form-control" id="mobile" name="mobile" pattern="\d{11}" required>
+                                      <div class="invalid-feedback">
+                                          Please enter a valid 10-digit mobile number.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="pincode" class="form-label">Pincode</label>
+                                      <input type="text" class="form-control" name="pincode" id="pincode" required>
+                                      <div class="invalid-feedback">
+                                          Please enter your pincode.
+                                      </div> 
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="locality" class="form-label">Locality</label>
+                                      <input type="text" class="form-control" name="locality" id="locality" required>
+                                      <div class="invalid-feedback">
+                                          Please enter your locality.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="address" class="form-label">Address (Area and Street)</label>
+                                      <input type="text" class="form-control" name="address" id="address" required>
+                                      <div class="invalid-feedback">
+                                          Please enter your address.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="city" class="form-label">City/District/Town</label>
+                                      <input type="text" class="form-control" name="city" id="city" required>
+                                      <div class="invalid-feedback">
+                                          Please enter your city.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="state" class="form-label">State</label>
+                                      <select class="form-select" id="state" name="state" required>
+                                          <option value="" disabled selected>Select your state</option>
+                                          <option value="kerala">Kerala</option>
+                                          <option value="tamilnadu">Tamil Nadu</option>
+                                          <option value="karnataka">Karnataka</option>
+                                          <option value="maharashtra">Maharashtra</option>
+                                      </select>
+                                      <div class="invalid-feedback">
+                                          Please select your state.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="landmark" class="form-label">Landmark</label>
+                                      <input type="text" class="form-control" name="landmark" id="landmark">
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="altmobile" class="form-label">Alternate Phone</label>
+                                      <input type="text" class="form-control" id="altmobile" name="altmobile" pattern="\d{11}">
+                                      <div class="invalid-feedback">
+                                          Please enter a valid 10-digit mobile number.
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12">
+                                      <label for="addresstype" class="form-label">Address Type</label>
+                                      <select class="form-select" id="addresstype" name="addresstype" required>
+                                          <option value="" disabled selected>Select address type</option>
+                                          <option value="home">Home</option>
+                                          <option value="office">Office</option>
+                                      </select>
+                                      <div class="invalid-feedback">
+                                          Please select address type.
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" id="clsBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" onclick="formSubmit()" class="btn btn-primary" id="submitBtn">Submit</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>  
+
+
+
+              
+                </div>
+              </div>
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
+
+            
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script> 
+
+
+function formSubmit() {
+  
+  const formData = {
+    name: document.getElementById('name').value,
+    mobile: document.getElementById('mobile').value,
+    pincode: document.getElementById('pincode').value,
+    locality: document.getElementById('locality').value,
+    address: document.getElementById('address').value,
+    city: document.getElementById('city').value,
+    state: document.getElementById('state').value,
+    landmark: document.getElementById('landmark').value,
+    altmobile: document.getElementById('altmobile').value,
+    addresstype: document.getElementById('addresstype').value
+  };
+    
+   let validateSuccess =validation()
+  function validation() {
+    const textRegex = /^[A-Za-z\s]+$/;
+    const numberRegex = /^\d{10}$/;
+
+    let errors = [];
+
+    
+    if (!textRegex.test(formData.name)) {
+        errors.push("Name must only contain letters and spaces.");
+    }
+
+    
+    if (!numberRegex.test(formData.mobile)) {
+        errors.push("Mobile number must be exactly 10 digits.");
+    }
+
+    if (!/^\d{6}$/.test(formData.pincode)) {
+        errors.push("Pincode must be exactly 6 digits.");
+    }
+
+    if (!textRegex.test(formData.locality)) {
+        errors.push("Locality must only contain letters and spaces.");
+    }
+
+    if (!formData.address.trim()) {
+        errors.push("Address cannot be empty.");
+    }
+
+    if (!textRegex.test(formData.city)) {
+        errors.push("City must only contain letters and spaces.");
+    }
+
+    if (!textRegex.test(formData.state)) {
+        errors.push("State must only contain letters and spaces.");
+    }
+
+    if (formData.landmark && !textRegex.test(formData.landmark)) {
+        errors.push("Landmark must only contain letters and spaces.");
+    }
+
+    if (formData.altmobile && !numberRegex.test(formData.altmobile)) {
+        errors.push("Alternate mobile number must be exactly 10 digits.");
+    }
+
+    if (!formData.addresstype.trim()) {
+        errors.push("Address type cannot be empty.");
+    }
+
+    if (errors.length > 0) {
+
+      Swal.fire({
+     icon: "error",
+     title: "Validation errors",
+    text: errors.join("\n"),
+
+}); 
+    
+        return false; 
+    }
+
+    return true;
+
+
+  }
+
+
+
+
+ if(validateSuccess==true){ 
+     
+  fetch('/newaddress', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(errorData => {
+        throw new Error(errorData.message || 'Network response was not ok');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    Swal.fire({
+      title: 'Success!',
+      text: data.message,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(result => {
+      if (result.isConfirmed) {
+        document.getElementById('addAddressForm').reset(); 
+        document.getElementById('clsBtn').click()
+        window.location.reload()
+        const modal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+        if (modal) {
+          modal.hide();
+        } else {
+          console.error('Modal instance not found');
+        }
+      }
+    });
+  })
+  .catch(error => {
+    Swal.fire({
+      title: 'Error!',
+      text: error.message,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  });
+}
+
+}
+
+
+
+
+(function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+
+
+
+const hiddenUserAddress = JSON.parse(document.getElementById('hiddenUserAddress').value);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const editButtons = document.querySelectorAll('.edit-btn');
+
+  editButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const dataIndex = button.getAttribute('data-index');
+      const data = JSON.parse(dataIndex);
+
+      document.getElementById('addressIndex').value = data[0];
+      document.getElementById('editName').value = data[1];
+      document.getElementById('editMobile').value = data[2];
+      document.getElementById('editPincode').value = data[3];
+      document.getElementById('editLocality').value = data[4];
+      document.getElementById('editAddress').value = data[5];
+      document.getElementById('editCity').value = data[6]; 
+      document.getElementById('editState').value = data[7];
+      document.getElementById('editLandmark').value = data[8];
+      document.getElementById('editAltmobile').value = data[9];
+      document.getElementById('editAddresstype').value = data[10]; 
+    });
+  });
+});
+
+
+
+function deleteCofo() {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      }).then(() => {
+        // Redirect to the delete URL
+        const index= document.getElementById('index').value
+        window.location.href = `/addressdelete/${index}`;
+        
+
+      });
+    }
+  });
+}
+
+</script>
+
+
+
+
+
+
+<%- include('../layout/footer') %>
+                                        

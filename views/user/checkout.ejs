@@ -233,18 +233,24 @@
             
             <div class="col-sm-8 mt-5">
              
-              <button onclick="showCouponCard()" id="show-couponCard" class="btn btn-primary"><i class="fa-solid fa-gift" style="color: #ffffff;"></i> apply coupon</button>
+     <!-- Button to Show Coupon Card -->
+<!-- Button to Show Coupon Card -->
+<button onclick="showCouponCard()" id="show-couponCard" style="background-color: #007bff; color: #ffffff; border: none; padding: 10px 20px; cursor: pointer;">
+  <i class="fa-solid fa-gift" style="color: #ffffff;"></i> Apply Coupon
+</button>
 
-    <!-- Coupon Card Div -->
-    <div class="coupon-card hidden">
-        <form action="#">
-            <div class="form-group">
-                <label for="Coupon">Enter coupon Code</label>
-                <input type="text" id="Coupon" class="form-control input-number" placeholder="Your Coupon Number...">
-                <input type="button" onclick="applyCoupon()" value="Apply" class="btn btn-primary">
-            </div>
-        </form>
-    </div>
+<!-- Coupon Card Div -->
+<div class="coupon-card" style="display: none;">
+  <form action="#">
+      <div style="margin: 10px 0;">
+          <label for="Coupon" style="display: block; margin-bottom: 5px;">Enter Coupon Code</label>
+          <input type="text" id="Coupon" style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" placeholder="Your Coupon Number...">
+          <input type="button" onclick="applyCoupon()" value="Apply" style="background-color: #007bff; color: #ffffff; border: none; padding: 8px 15px; margin-top: 10px; cursor: pointer;">
+      </div>
+  </form>
+</div>
+
+
 
    
 
@@ -515,21 +521,37 @@
                               </div>
                             </div>
                           </div>
-                          <% if (typeof wallet !== 'undefined') { %>
- 
-
-                          <div class="form-group">
-                            <div class="col-md-12">
-                              <div class="radio">
-                                <label><input type="radio" value="Wizwallet" name="optradio"> wallet</label>
-                                <label for=""  > <a style="color: red; text-decoration: none;"  href="/wallet"> ( <strong>wallet-balance :</strong>₹<%= wallet.balance%>) </a> </label>
-
-                                
+                          <% if (wallet && wallet.balance !== undefined) { %>
+                            <div class="form-group">
+                              <div class="col-md-12">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" value="Wizwallet" name="optradio" id="walletRadio" />
+                                  <label class="form-check-label" for="walletRadio">
+                                    Wallet
+                                  </label>
+                                  <a class="text-danger" href="/wallet">
+                                    ( <strong>Wallet Balance:</strong> ₹<%= wallet.balance %>)
+                                  </a>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          
+                          <% } else { %>
+                            <div class="form-group">
+                              <div class="col-md-12">
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" value="Wizwallet" name="optradio" id="walletRadio" disabled />
+                                  <label class="form-check-label" for="walletRadio">
+                                    Wallet (Not Available )
+                                  </label>
+                                  <a class="text-muted" href="">
+                                   
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
                           <% } %>
+                          
+                          
                         
                           <div class="form-group">
                             <div class="col-md-12">
@@ -1894,12 +1916,14 @@ function removeCoupon() {
 //coupon button 
 
 function showCouponCard() {
-            // Get the coupon card div
-            var couponCard = document.querySelector('.coupon-card');
-            // Remove the 'hidden' class to make it visible
-            couponCard.classList.remove('hidden');
-            document.getElementById("show-couponCard").style.display='none'
-        }
+    // Get the coupon card div
+    var couponCard = document.querySelector('.coupon-card');
+    // Remove the inline 'display: none;' style to make it visible
+    couponCard.style.display = 'block';
+    // Hide the show coupon button
+    document.getElementById("show-couponCard").style.display = 'none';
+}
+
 
 
   </script>

@@ -2064,7 +2064,8 @@ const getWallet = async (req, res) => {
       const wallet = await Wallet.findOne({ user_id: new object_id(req.session.user_id) });
       // If wallet is not found, return an error message or redirect
       if (!wallet) {
-          return res.status(404).json({ message: 'Wallet not found' });
+        res.render('user/walletNotexist') 
+
       }
       const user = await User.findOne({ _id: req.session.user_id });
 
@@ -2075,7 +2076,6 @@ const getWallet = async (req, res) => {
       });
   } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Server Error' });
   }
 };
 
